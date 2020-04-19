@@ -1,32 +1,143 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="burger" @click="toggle">
+      <span class="icon-line"></span>
+      <span class="icon-line-short"></span>
+      <span class="icon-line"></span>
     </div>
-    <router-view />
+    <nav class="navbar" :class="{ navOps: open }">
+      <div class="nav-logo">Pito</div>
+      <ul class="nav-branch">
+        <li class="nav-items">
+          <router-link to="/">Home</router-link>
+        </li>
+        <li class="nav-items">Work</li>
+        <li class="nav-items">Note</li>
+        <li class="nav-items">About Me</li>
+      </ul>
+    </nav>
+    <div id="nav">
+      <router-link to="/about">test</router-link>
+      <router-view />
+    </div>
   </div>
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Pragati Narrow", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin-left: 250px;
+  margin-left: 250px;
+  padding: 2rem;
+}
+ul {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+//--- navbar -----
+.navbar {
+  font-family: "Advent Pro", sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 250px;
+  height: 100%;
+  padding-top: 30px;
+  background-color: #42b983;
+  transition: all 1s ease;
+}
+.nav-logo {
+  font-size: 5rem;
+}
+.nav-branch {
+  list-style: none;
+  font-size: 1.5rem;
+}
+.nav-items {
+  padding: 2rem 5rem 2rem 5rem;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+/*------Viewport less than 768px------*/
+@media only screen and (max-width: 1024px) {
+  .navbar {
+    left: -250px;
+  }
+  .navOps {
+    left: 0px !important;
+  }
+  #app {
+    margin-left: 0 !important;
+  }
+  .navActive {
+    transform: translateX(250px);
+  }
+  .burger {
+    display: block !important;
   }
 }
+// -----burger
+.burger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1.5rem 1rem;
+  cursor: pointer;
+  z-index: 2;
+  display: none;
+}
+.icon-line {
+  width: 1.5rem;
+  height: 3px;
+  background-color: #000000;
+  display: block;
+  margin: 5px;
+}
+.icon-line-short {
+  width: 1.2rem;
+  height: 3px;
+  background-color: #000000;
+  display: block;
+  margin: 5px;
+}
 </style>
+<script>
+export default {
+  data: function() {
+    return {
+      open: false,
+      screenWidth: document.documentElement.clientWidth
+    };
+  },
+  methods: {
+    toggle() {
+      this.open = !this.open;
+      console.log("123");
+    }
+  },
+  watch: {
+    screenWidth: function() {
+      // 監聽螢幕寬度變化
+      if (this.screenWidth < 1024) {
+        return (this.open = false);
+      }
+      console.log(122);
+    }
+  },
+  mounted() {
+    var _this = this; //聲明ㄧ新變量指向Vue父函数的this
+    window.onresize = function() {
+      // 定義視窗大小變更通知事件
+      //_this.screenWidth 即時修改父函数的“screenWidth”動態變量
+      _this.screenWidth = document.documentElement.clientWidth; // 視窗寬度
+    };
+  }
+};
+</script>
