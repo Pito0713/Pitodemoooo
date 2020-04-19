@@ -2,22 +2,22 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <div class="title">
-      <a>Vue WorkSpace</a>
+      <a>VueWorkSpace</a>
     </div>
     <div class="workspaceInfo">
-      <a>更新於{{ value }}</a>
+      <a> 今天是{{ value }} </a>
       <a>分類於</a>
     </div>
-    <div class="VueWorkSpace">
-      <div class="text">123</div>
-      <div class="textInfo">5434</div>
-    </div>
+    <VueWorkspace></VueWorkspace>
   </div>
 </template>
-
 <script>
+import VueWorkspace from "../components/VueWorkspace.vue";
 export default {
   name: "HelloWorld",
+  components: {
+    VueWorkspace
+  },
   props: {
     msg: String
   },
@@ -37,28 +37,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.VueWorkSpace {
-  display: inline-flex;
-  position: relative;
-  width: 100%;
-  background-color: aquamarine;
-}
-.VueWorkSpace .text {
-  flex: 2 1 20%;
-  font-size: 2rem;
-}
-.VueWorkSpace .textInfo {
-  flex: 1 2 80%;
-  font-size: 1rem;
-  background-color: wheat;
-}
 .workspaceInfo a {
   padding: 1rem 2rem;
   font-size: 0.8rem;
 }
 .title {
-  font-size: 2rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 4.5rem;
   font-weight: 600;
   padding: 2rem 0rem;
 }

@@ -6,18 +6,19 @@
       <span class="icon-line"></span>
     </div>
     <nav class="navbar" :class="{ navOps: open }">
-      <div class="nav-logo">Pito</div>
+      <div class="nav-logo">
+        <router-link to="/">Pito</router-link>
+      </div>
       <ul class="nav-branch">
         <li class="nav-items">
           <router-link to="/">Home</router-link>
         </li>
-        <li class="nav-items">Work</li>
+        <li class="nav-items"><router-link to="/about">test</router-link></li>
         <li class="nav-items">Note</li>
         <li class="nav-items">About Me</li>
       </ul>
     </nav>
-    <div id="nav">
-      <router-link to="/about">test</router-link>
+    <div>
       <router-view />
     </div>
   </div>
@@ -25,7 +26,7 @@
 
 <style lang="scss">
 #app {
-  font-family: "Pragati Narrow", sans-serif;
+  font-family: "Fira Sans Extra Condensed", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -41,17 +42,23 @@ ul {
   margin-inline-end: 0px;
   padding-inline-start: 0px;
 }
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: #2c3e50;
+}
 //--- navbar -----
 .navbar {
-  font-family: "Advent Pro", sans-serif;
+  font-family: "Playfair Display SC", serif;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1;
   width: 250px;
   height: 100%;
-  padding-top: 30px;
-  background-color: #42b983;
+  padding-top: 2rem;
+  background-color: #ccefba;
   transition: all 1s ease;
 }
 .nav-logo {
@@ -69,6 +76,9 @@ ul {
 @media only screen and (max-width: 1024px) {
   .navbar {
     left: -250px;
+  }
+  .nav-logo {
+    padding: 2rem 3rem 2rem 3rem;
   }
   .navOps {
     left: 0px !important;
