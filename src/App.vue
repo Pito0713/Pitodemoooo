@@ -13,7 +13,9 @@
         <li class="nav-items">
           <router-link to="/">Home</router-link>
         </li>
-        <li class="nav-items"><router-link to="/about">test</router-link></li>
+        <li class="nav-items">
+          <router-link to="/about">test</router-link>
+        </li>
         <li class="nav-items">Note</li>
         <li class="nav-items">About Me</li>
       </ul>
@@ -31,8 +33,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-left: 250px;
-  margin-left: 250px;
+  margin-left: 30%;
   padding: 2rem;
 }
 ul {
@@ -54,8 +55,8 @@ a:visited {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
-  width: 250px;
+  z-index: 2;
+  width: 30%;
   height: 100%;
   padding-top: 2rem;
   background-color: #ccefba;
@@ -75,9 +76,13 @@ a:visited {
 /*------Viewport less than 768px------*/
 @media only screen and (max-width: 1024px) {
   .navbar {
-    left: -250px;
+    left: -30%;
   }
   .nav-logo {
+    font-size: 3.8rem;
+    padding: 3rem 3rem 2rem 3rem;
+  }
+  .nav-items {
     padding: 2rem 3rem 2rem 3rem;
   }
   .navOps {
@@ -86,8 +91,27 @@ a:visited {
   #app {
     margin-left: 0 !important;
   }
-  .navActive {
-    transform: translateX(250px);
+  .burger {
+    display: block !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    left: -100%;
+  }
+  .nav-logo {
+    font-size: 4.5rem;
+    padding: 2rem 3rem 2rem 3rem;
+  }
+  .nav-items {
+    padding: 2rem 3rem 2rem 3rem;
+  }
+  .navOps {
+    left: 0px !important;
+  }
+  #app {
+    margin-left: 0 !important;
   }
   .burger {
     display: block !important;
@@ -100,7 +124,7 @@ a:visited {
   left: 0;
   padding: 1.5rem 1rem;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
   display: none;
 }
 .icon-line {

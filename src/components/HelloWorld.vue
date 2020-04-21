@@ -1,11 +1,13 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <div class="title">
+  <div class="helloWorld">
+    <div class="webTitle">
+      <h1>{{ msg }}</h1>
+    </div>
+    <div class="infoTitle">
       <a>VueWorkSpace</a>
     </div>
     <div class="workspaceInfo">
-      <a> 今天是{{ value }} </a>
+      <a>今天是{{ value }}</a>
       <a>分類於</a>
     </div>
     <VueWorkspace></VueWorkspace>
@@ -37,13 +39,51 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.webTitle {
+  position: relative;
+  display: block;
+}
+.webTitle::before {
+  position: absolute;
+  display: block;
+  content: " ";
+  top: -10px;
+  left: 20px;
+  border-top: 1px solid #7c8782;
+  border-left: 1px solid #7c8782;
+  width: 20px;
+  height: 20px;
+}
+.webTitle::after {
+  position: absolute;
+  display: block;
+  content: " ";
+  top: 20px;
+  right: 20px;
+  border-bottom: 1px solid #7c8782;
+  border-right: 1px solid #7c8782;
+  width: 20px;
+  height: 20px;
+}
+@media only screen and (max-width: 320px) {
+  .webTitle::after {
+    top: 30px;
+    right: -10px;
+  }
+  .webTitle::before {
+    top: -10px;
+    left: -10px;
+  }
+}
 .workspaceInfo a {
   padding: 1rem 2rem;
   font-size: 0.8rem;
 }
-.title {
-  font-size: 4.5rem;
+.infoTitle {
+  font-size: 3rem;
   font-weight: 600;
-  padding: 2rem 0rem;
+  padding: 1rem 0rem;
+  border-top: 1px solid #7c8782;
+  color: #7cbc5c;
 }
 </style>
