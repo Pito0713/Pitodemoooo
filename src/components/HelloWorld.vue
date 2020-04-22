@@ -47,8 +47,8 @@ export default {
   position: absolute;
   display: block;
   content: " ";
-  top: -10px;
-  left: 20px;
+  top: -2%;
+  left: 6%;
   border-top: 1px solid #7c8782;
   border-left: 1px solid #7c8782;
   width: 20px;
@@ -58,22 +58,12 @@ export default {
   position: absolute;
   display: block;
   content: " ";
-  top: 20px;
-  right: 20px;
+  top: 75%;
+  right: 6%;
   border-bottom: 1px solid #7c8782;
   border-right: 1px solid #7c8782;
   width: 20px;
   height: 20px;
-}
-@media only screen and (max-width: 320px) {
-  .webTitle::after {
-    top: 30px;
-    right: -10px;
-  }
-  .webTitle::before {
-    top: -10px;
-    left: -10px;
-  }
 }
 .workspaceInfo a {
   padding: 1rem 2rem;
@@ -86,4 +76,20 @@ export default {
   border-top: 1px solid #7c8782;
   color: #7cbc5c;
 }
+@media only screen and (max-width: 786px) {
+  .webTitle::after {
+    top: 30px;
+    right: -10px;
+  }
+  .webTitle::before {
+    top: -10px;
+    left: -10px;
+  }
+}
+@media only screen and (max-width: 512px) {
+  .infoTitle {
+  font-size: 2rem;
+}
+}
+
 </style>

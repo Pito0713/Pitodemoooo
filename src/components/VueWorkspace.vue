@@ -1,27 +1,20 @@
 <template>
   <div class="VueWorkSpace">
     <div class="leftarrowIcon" @click="plusSpace(-1)">
-      <span class="leftArrow">1</span>
+      <span><i class="fas fa-angle-left"></i></span>
     </div>
     <div class="rightarrowIcon" @click="plusSpace(1)">
-      <span class="rightArrow">2</span>
+      <span><i class="fas fa-angle-right"></i></span>
     </div>
     <div class="spaceContainer">
       <div class="space">
-        <div class="text">1</div>
-        <div class="textInfo">467</div>
+        <div><img alt="Vue logo"  width="100%" src="../assets/VueWorkspaceEvent.png"/></div>
       </div>
       <div class="space">
-        <div class="text">2</div>
-        <div class="textInfo">458</div>
+        <div><img alt="Vue logo" style="display:block; margin:auto" width="100%" src="../assets/VueWorkspaceComponent.png"/></div>
       </div>
       <div class="space" style="display: none">
-        <div class="text">3</div>
-        <div class="textInfo">556</div>
-      </div>
-      <div class="space" style="display: none">
-        <div class="text">4</div>
-        <div class="textInfo">556</div>
+        <div><img alt="Vue logo" style="display:block; margin:auto" width="80%" src="../assets/VueWorkspaceLifecycle.png"/></div>
       </div>
     </div>
   </div>
@@ -38,55 +31,86 @@
 }
 .space {
   width: 100%;
-  display: flex;
-  box-shadow: 3px 2px 3px 2px #c6c6c6;
+  box-shadow: 0px 0px 2px 1px #c6c6c6;
   margin: 1rem;
   height: 250px;
+  border-radius: 3%;
+    display:  flex;
+   align-items: center;
+   justify-content:  center;
 }
-.VueWorkSpace .text {
-  flex: 2 1 30%;
-  font-size: 2rem;
-}
-.VueWorkSpace .textInfo {
-  flex: 1 3 70%;
-  font-size: 2em;
-}
+
+
 
 /*---arrow*/
 .leftarrowIcon,
 .rightarrowIcon {
-  width: 30px;
-  height: 20px;
-  background: #00000020;
-  transform: translateY(50%);
+  width: 4%;
+  height: 20%;
+  background: #00000010;
+  transform: translateY(-50%);
   z-index: 1;
   cursor: pointer;
+  font-size: 30px;
 }
 .leftarrowIcon {
   position: absolute;
-  left: 0;
-  top: 45%;
+  left: 2%;
+  top: 50%;
   border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;
 }
 .rightarrowIcon {
   position: absolute;
-  right: 0;
-  top: 45%;
+  right: 2%;
+  top: 50%;
   border-top-left-radius: 10%;
   border-bottom-left-radius: 10%;
 }
 .leftarrowIcon:hover,
 .rightarrowIcon:hover {
-  background: #00000050;
+  background: #00000005;
   transition: ease 0.3s;
   z-index: 1;
+  box-shadow: 0 0 3px 2px #c6c6c6;
 }
-/*當小於尺寸 隱藏部分*/
+.leftarrowIcon .fa-angle-left,
+.rightarrowIcon .fa-angle-right {
+  transform: translateY(35%)
+}
+/*------當小於尺寸1023 
+隱藏部分space*/
 @media only screen and (max-width: 1023px) {
   .space:nth-child(2) {
     display: none;
   }
+}
+/*------當小於尺寸1023 
+調整space arrow的位置*/
+@media only screen and (max-width: 432px) {
+  .leftarrowIcon,
+.rightarrowIcon {
+  width: 8%;
+  height: 20%;
+  background: #00000010;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
+  font-size: 30px;
+}
+.leftarrowIcon {
+  left: 5%;
+  top: 50%;
+  border-top-right-radius: 10%;
+  border-bottom-right-radius: 10%;
+}
+.rightarrowIcon {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  border-top-left-radius: 10%;
+  border-bottom-left-radius: 10%;
+}
 }
 </style>
 <script>

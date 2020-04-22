@@ -33,7 +33,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-left: 30%;
+  margin-left: 20%;
   padding: 2rem;
 }
 ul {
@@ -56,7 +56,7 @@ a:visited {
   top: 0;
   left: 0;
   z-index: 2;
-  width: 30%;
+  width: 20%;
   height: 100%;
   padding-top: 2rem;
   background-color: #ccefba;
@@ -76,6 +76,7 @@ a:visited {
 /*------Viewport less than 768px------*/
 @media only screen and (max-width: 1024px) {
   .navbar {
+    width: 30%;
     left: -30%;
   }
   .nav-logo {
@@ -95,7 +96,7 @@ a:visited {
     display: block !important;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .navbar {
     width: 100%;
     left: -100%;
