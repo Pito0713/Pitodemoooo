@@ -8,6 +8,11 @@
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <!--Font Awesome-->
   <script src="https://kit.fontawesome.com/af0e7e3bea.js" crossorigin="anonymous"></script>
+  <!--hightlight-->
+  <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/default.min.css">
+      <link type="text/css" rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/2.1.364/styles/shThemeDefault.css" />
+      <link type="text/css" rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/2.1.364/styles/shCore.css" />
   <title><%= htmlWebpackPlugin.options.title %></title>
   <style lang="scss">
     body {
@@ -21,6 +26,15 @@
 </head>
 
 <body>
+<script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shCore.js"> </script>
+<script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJScript.js"> </script>
+
+<script type="text/javascript">
+SyntaxHighlighter.config.bloggerMode = true;
+SyntaxHighlighter.all();
+</script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   <noscript>
     <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
       Please enable it to continue.</strong>

@@ -1,5 +1,5 @@
 <template>
-  <div class="helloWorld">
+  <div>
     <div class="webTitle">
       <h1>{{ msg }}</h1>
     </div>
@@ -11,14 +11,18 @@
       <a>分類於</a>
     </div>
     <VueWorkspace></VueWorkspace>
+    <Vuespace></Vuespace>
   </div>
 </template>
+
 <script>
 import VueWorkspace from "../components/VueWorkspace.vue";
+import Vuespace from "../components/Vuespace.vue";
 export default {
-  name: "HelloWorld",
+  name: "HelloMyweb",
   components: {
-    VueWorkspace
+    VueWorkspace,
+    Vuespace
   },
   props: {
     msg: String
@@ -88,8 +92,7 @@ export default {
 }
 @media only screen and (max-width: 512px) {
   .infoTitle {
-  font-size: 2rem;
+    font-size: 2rem;
+  }
 }
-}
-
 </style>

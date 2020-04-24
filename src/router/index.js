@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Vuespace from "../components/Vuespace.vue";
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,11 @@ const routes = [
     path: "/vueworkspace",
     name: "vueworkspace",
     component: () => import("../components/VueWorkspace.vue")
+  },
+  {
+    path: "/vuespace",
+    name: "vuespace",
+    component: Vuespace
   }
 ];
 
