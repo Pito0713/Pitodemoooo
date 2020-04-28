@@ -34,7 +34,6 @@
   text-align: center;
   color: #2c3e50;
   margin-left: 20%;
-  padding: 2rem;
 }
 ul {
   margin-block-start: 0em;

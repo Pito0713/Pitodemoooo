@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="myWeb">
     <div class="webTitle">
       <h1>{{ msg }}</h1>
     </div>
@@ -12,17 +12,23 @@
     </div>
     <VueWorkspace></VueWorkspace>
     <Vuespace></Vuespace>
+    <VuespaceProp></VuespaceProp>
+    <VuespaceEvent></VuespaceEvent>
   </div>
 </template>
 
 <script>
+import VuespaceProp from "../components/VuespaceProp.vue";
+import VuespaceEvent from "../components/VuespaceEvent.vue";
 import VueWorkspace from "../components/VueWorkspace.vue";
 import Vuespace from "../components/Vuespace.vue";
 export default {
   name: "HelloMyweb",
   components: {
     VueWorkspace,
-    Vuespace
+    Vuespace,
+    VuespaceProp,
+    VuespaceEvent
   },
   props: {
     msg: String
@@ -36,13 +42,17 @@ export default {
       (aData.getMonth() + 1) +
       "-" +
       aData.getDate();
-    console.log(this.value); //2019-8-20
+    console.log(this.value);
+    //2019-8-20
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.myWeb {
+  padding: 2rem;
+}
 .webTitle {
   position: relative;
   display: block;

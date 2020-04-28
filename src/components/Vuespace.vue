@@ -28,7 +28,8 @@
             //組件名稱
             &#39;callText&#39;:{
             //選項物件
-                template:&#39;&lt;div class=&quot;component&quot;&gt;{{message}}&lt;/div&gt;&#39;,
+                template:
+                &#39;&lt;div class=&quot;component&quot;&gt;{ {message} }&lt;/div&gt;&#39;,
             //元件data只能是Function可以重複利用
                 data: function(){
                     return{
@@ -49,7 +50,9 @@
   display: flex;
   text-align: left;
   padding-top: 5rem;
+  padding-bottom: 5rem;
   width: 100%;
+  border-bottom: 1px solid #000006;
 }
 .textspace {
   flex: 1 2 50%;

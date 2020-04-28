@@ -70,8 +70,8 @@
 /*---dot*/
 .dot {
   cursor: pointer;
-  height: 8px;
-  width: 8px;
+  height: 7px;
+  width: 7px;
   margin: 0 4px;
   background-color: #bbb;
   border-radius: 50%;
