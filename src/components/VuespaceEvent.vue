@@ -1,5 +1,5 @@
 <template>
-  <div class="TipSpace">
+  <section class="TipSpace">
     <div class="textspace">
       <h1>元件傳遞 Emit event</h1>
       <a class="weight">子元件</a>傳遞資料給
@@ -69,7 +69,7 @@
 </code>
 </pre>
     </div>
-  </div>
+  </section>
 </template>
 <style scoped>
 .TipSpace {

@@ -1,5 +1,5 @@
 <template>
-  <div class="TipSpace">
+  <section class="TipSpace">
     <div class="textspace">
       <h1 class="textTitle">元件傳遞 Props</h1>
       <p>
@@ -50,7 +50,7 @@
 </code>
 </pre>
     </div>
-  </div>
+  </section>
 </template>
 <style scoped>
 .TipSpace {

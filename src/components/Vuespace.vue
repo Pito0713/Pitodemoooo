@@ -1,5 +1,5 @@
 <template>
-  <div class="TipSpace">
+  <section class="TipSpace">
     <div class="textspace">
       <h1>區域註冊</h1>
       <p>
@@ -43,7 +43,7 @@
 </code>
 </pre>
     </div>
-  </div>
+  </section>
 </template>
 <style scoped>
 .TipSpace {

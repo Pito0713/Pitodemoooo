@@ -10,9 +10,14 @@
         <router-link to="/">Pito</router-link>
       </div>
       <ul class="nav-branch">
-        <li class="nav-items">
+        <li class="nav-items" @click="seen = !seen">
           <router-link to="/">Home</router-link>
         </li>
+        <div v-if="seen" class="list">
+          <div class="nav-lists" :class="{active: active===0}" @click="scrollTo(0)">component</div>
+          <div class="nav-lists" :class="{active: active===1}" @click="scrollTo(1)">Prop In</div>
+          <div class="nav-lists" :class="{active: active===2}" @click="scrollTo(2)">Event Emit</div>
+        </div>
         <li class="nav-items">
           <router-link to="/about">test</router-link>
         </li>
@@ -27,13 +32,14 @@
 </template>
 
 <style lang="scss">
+//--- goboal ------------------------------------
 #app {
   font-family: "Fira Sans Extra Condensed", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-left: 20%;
+  margin-left: 25%;
 }
 ul {
   margin-block-start: 0em;
@@ -48,28 +54,39 @@ a {
 a:visited {
   color: #2c3e50;
 }
-//--- navbar -----
+//--- navbar ------------------------------------
 .navbar {
   font-family: "Playfair Display SC", serif;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 2;
-  width: 20%;
+  width: 25%;
   height: 100%;
   padding-top: 2rem;
   background-color: #ccefba;
   transition: all 1s ease;
 }
 .nav-logo {
-  font-size: 5rem;
+  font-size: 7rem;
 }
 .nav-branch {
   list-style: none;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 .nav-items {
-  padding: 2rem 5rem 2rem 5rem;
+  padding: 1rem;
+  font-size: 2.5rem;
+}
+.list {
+  padding-bottom: 3rem;
+}
+.nav-lists {
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.active {
+  background-color: #aee5a7;
 }
 
 /*------Viewport less than 768px------*/
@@ -79,11 +96,7 @@ a:visited {
     left: -30%;
   }
   .nav-logo {
-    font-size: 3.8rem;
-    padding: 3rem 3rem 2rem 3rem;
-  }
-  .nav-items {
-    padding: 2rem 3rem 2rem 3rem;
+    font-size: 6rem;
   }
   .navOps {
     left: 0px !important;
@@ -95,17 +108,13 @@ a:visited {
     display: block !important;
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 765px) {
   .navbar {
     width: 100%;
     left: -100%;
   }
   .nav-logo {
-    font-size: 4.5rem;
-    padding: 2rem 3rem 2rem 3rem;
-  }
-  .nav-items {
-    padding: 2rem 3rem 2rem 3rem;
+    font-size: 6rem;
   }
   .navOps {
     left: 0px !important;
@@ -147,13 +156,52 @@ export default {
   data: function() {
     return {
       open: false,
+      seen: false,
+      active: 0, // 建立起始
       screenWidth: document.documentElement.clientWidth
     };
   },
   methods: {
     toggle() {
       this.open = !this.open;
-      console.log("123");
+    },
+    onScroll() {
+      // 取的所有list元素
+      const navContents = document.querySelectorAll(".tip section");
+      // 建立所有list元素的 offsetTop
+      const offsetTopArr = [];
+      //帶入 offsetTop
+      navContents.forEach(item => {
+        offsetTopArr.push(item.offsetTop);
+      });
+      //驗證
+      console.log(offsetTopArr)
+
+      //取得DOM的 scrollTop
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      // 起始為0 
+      let navIndex = 0;
+      //建立迴圈
+      for (let n = 0; n < offsetTopArr.length; n++) {
+        // 如果 scrollTop 大於第n元素的 offsetTop
+        // 那前一個元素就看不到了 ,這是輪到下個 n 元素
+        if (scrollTop >= offsetTopArr[n]) {
+          navIndex = n;
+          console.log(n + 'n')
+          console.log(scrollTop)
+        }
+      }
+      // 回傳 data 觸發 active
+      this.active = navIndex;
+    },
+    scrollTo(index) {
+      // 取得點及目標的 offsetTop
+      // 從1 開始算 因為css起始是 1 
+      // index 起始是 ０
+      let getOffsetTop = document.querySelector(`.tip section:nth-child(${index + 1})`).offsetTop
+      console.log(getOffsetTop + 'get');
+      //帶入目標的 offsetTop  然後移動是目標位置
+      document.documentElement.scrollTop = getOffsetTop;
     }
   },
   watch: {
@@ -172,6 +220,12 @@ export default {
       //_this.screenWidth 即時修改父函数的“screenWidth”動態變量
       _this.screenWidth = document.documentElement.clientWidth; // 視窗寬度
     };
+
+    window.addEventListener("scroll", this.onScroll);
+  },
+  destroy() {
+    // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
+    window.removeEventListener("scroll", this.onScroll);
   }
-};
+}
 </script>

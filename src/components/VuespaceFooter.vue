@@ -1,8 +1,17 @@
 <template>
   <div class="footer">
-    <div class="footTitle">Vue cil</div>
-    <div class="footTitle whiteBorder">Vue</div>
-    <div class="footTitle">Vue Router</div>
+    <div class="footerContainer">
+      <div class="footTitle">
+        <a href="https://cli.vuejs.org/zh/">Vue cil</a>
+      </div>
+      <div class="footTitle whiteBorder">
+        <a href="https://cn.vuejs.org">Vue</a>
+      </div>
+      <div class="footTitle">
+        <a href="https://router.vuejs.org/zh/">Vue Router</a>
+      </div>
+    </div>
+
     <div class="foottext">© 2020 04 By AJie</div>
   </div>
 </template>
@@ -13,12 +22,14 @@ export default {};
 
 <style scoped lang="scss">
 .footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   position: relative;
   width: 100%;
-  height: 20%;
+  height: 25%;
   background-color: #7daa77;
+}
+.footerContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .footTitle {
   position: relative;
@@ -26,6 +37,12 @@ export default {};
   font-size: 1.3rem;
   padding: 1rem 0 1rem 0;
   margin: 0.5rem;
+}
+a:link {
+  color: #e5e5e5;
+}
+a:visited {
+  color: #e5e5e5;
 }
 .whiteBorder {
   border-left: 1px #e5e5e5 solid;

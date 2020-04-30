@@ -11,9 +11,12 @@
       <a>分類於</a>
     </div>
     <VueWorkspace></VueWorkspace>
-    <Vuespace></Vuespace>
-    <VuespaceProp></VuespaceProp>
-    <VuespaceEvent></VuespaceEvent>
+    <div class="tip">
+      <Vuespace></Vuespace>
+      <VuespaceProp></VuespaceProp>
+      <VuespaceEvent></VuespaceEvent>
+    </div> 
+    <div class="scrollTop" @click="upTop">＾</div>
   </div>
 </template>
 
@@ -44,8 +47,13 @@ export default {
       aData.getDate();
     console.log(this.value);
     //2019-8-20
+  },
+  methods: {
+    upTop() {
+                window.scrollTo(0,0);
+           }
   }
-};
+}  
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -89,6 +97,19 @@ export default {
   padding: 1rem 0rem;
   border-top: 1px solid #7c8782;
   color: #7cbc5c;
+}
+.scrollTop {
+  position: fixed;
+  display: block;
+  bottom: 5%;
+  right: 5%;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #7cbc5c;
+  z-index: 4;
+  cursor: pointer;
+  transition: all 3s ease;
 }
 @media only screen and (max-width: 786px) {
   .webTitle::after {
