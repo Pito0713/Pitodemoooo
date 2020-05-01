@@ -46,7 +46,6 @@ export default {
       "-" +
       aData.getDate();
     console.log(this.value);
-    //2019-8-20
   },
   methods: {
     upTop() {
@@ -68,15 +67,23 @@ export default {
             let _scrollTop = scrollTop;
             document.body.scrollTop = _scrollTop;
             document.documentElement.scrollTop = _scrollTop;
+            requestAnimationFrame(goUP);
           } else {
             let _scrollTop = 0;
             document.body.scrollTop = _scrollTop;
             document.documentElement.scrollTop = _scrollTop;
           }
-          requestAnimationFrame(goUP);
+          
         }
       }
     }
+  },
+  mounted() {
+    window.addEventListener("scrollTop", this.upTop);
+  },
+  destroy() {
+    // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
+    window.removeEventListener("scrollTop", this.upTop);
   }
 };
 </script>
