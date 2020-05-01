@@ -53,4 +53,16 @@ a:visited {
   position: relative;
   font-size: 1rem;
 }
+
+@media only screen and (max-width: 1024px) {
+
+}
+@media only screen and (max-width: 465px) {
+  .footTitle {
+  font-size: 1rem;
+  padding: 1rem 0 1rem 0;
+  margin: 0.5rem;
+}
+}
+
 </style>

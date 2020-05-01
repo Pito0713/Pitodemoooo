@@ -15,7 +15,7 @@
       <Vuespace></Vuespace>
       <VuespaceProp></VuespaceProp>
       <VuespaceEvent></VuespaceEvent>
-    </div> 
+    </div>
     <div class="scrollTop" @click="upTop">＾</div>
   </div>
 </template>
@@ -50,10 +50,35 @@ export default {
   },
   methods: {
     upTop() {
-                window.scrollTo(0,0);
-           }
+      //每次上滑移動50px
+      const step = 50;
+      //取的當前scrollTop 
+      let scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      //let getFirstOffsetTop = document.querySelector(
+        //`div:nth-child(1)`
+      //).offsetTop;
+      if (scrollTop > 0) {
+        goUP();
+      }
+      function goUP() {
+        if (scrollTop > 0) {
+          if (scrollTop - step > 0) {
+            scrollTop -= step;
+            let _scrollTop = scrollTop;
+            document.body.scrollTop = _scrollTop;
+            document.documentElement.scrollTop = _scrollTop;
+          } else {
+            let _scrollTop = 0;
+            document.body.scrollTop = _scrollTop;
+            document.documentElement.scrollTop = _scrollTop;
+          }
+          requestAnimationFrame(goUP);
+        }
+      }
+    }
   }
-}  
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

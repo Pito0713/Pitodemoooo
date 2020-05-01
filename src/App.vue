@@ -69,6 +69,7 @@ a:visited {
 }
 .nav-logo {
   font-size: 7rem;
+  padding-top: 2rem;
 }
 .nav-branch {
   list-style: none;
@@ -87,44 +88,6 @@ a:visited {
 }
 .active {
   background-color: #aee5a7;
-}
-
-/*------Viewport less than 768px------*/
-@media only screen and (max-width: 1024px) {
-  .navbar {
-    width: 30%;
-    left: -30%;
-  }
-  .nav-logo {
-    font-size: 6rem;
-  }
-  .navOps {
-    left: 0px !important;
-  }
-  #app {
-    margin-left: 0 !important;
-  }
-  .burger {
-    display: block !important;
-  }
-}
-@media only screen and (max-width: 765px) {
-  .navbar {
-    width: 100%;
-    left: -100%;
-  }
-  .nav-logo {
-    font-size: 6rem;
-  }
-  .navOps {
-    left: 0px !important;
-  }
-  #app {
-    margin-left: 0 !important;
-  }
-  .burger {
-    display: block !important;
-  }
 }
 // -----burger
 .burger {
@@ -150,6 +113,119 @@ a:visited {
   display: block;
   margin: 5px;
 }
+/*------Viewport less than 1024px------*/
+@media only screen and (max-width: 1024px) {
+  .navbar {
+    width: 30%;
+    left: -30%;
+  }
+  .nav-logo {
+    font-size: 6rem;
+  }
+  .navOps {
+    left: 0px !important;
+  }
+  #app {
+    margin-left: 0 !important;
+  }
+  .burger {
+    display: block !important;
+  }
+}
+@media only screen and (max-width: 765px) {
+  .navbar {
+    width: 40%;
+    left: -40%;
+  }
+  .nav-logo {
+    font-size: 4rem;
+  }
+  .nav-items {
+    font-size: 1.5rem;
+  }
+  .nav-lists {
+  font-size: 0.9rem;
+}
+  .navOps {
+    left: 0px !important;
+  }
+  #app {
+    margin-left: 0 !important;
+  }
+  .burger {
+    display: block !important;
+  }
+}
+@media only screen and (max-width: 465px) {
+  .navbar {
+    width: 40%;
+    left: -40%;
+  }
+  .nav-logo {
+    font-size: 3rem;
+  }
+  .nav-items {
+    font-size: 1rem;
+  }
+  .nav-lists {
+  font-size: 0.9rem;
+}
+  .navOps {
+    left: 0px !important;
+  }
+  #app {
+    margin-left: 0 !important;
+  }
+  .burger {
+    display: block !important;
+  }
+  .icon-line {
+    width: 1rem;
+    height: 2px;
+    margin: 3px;
+  }
+  .icon-line-short {
+    width: 0.8rem;
+    height: 2px;
+    margin: 3px;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .navbar {
+    width: 40%;
+    left: -40%;
+  }
+  .nav-logo {
+    font-size: 3rem;
+  }
+  .nav-items {
+    font-size: 1rem;
+  }
+  .nav-lists {
+  font-size: 0.6rem;
+
+}
+  .navOps {
+    left: 0px !important;
+  }
+  #app {
+    margin-left: 0 !important;
+  }
+  .burger {
+    display: block !important;
+  }
+  .icon-line {
+    width: 1rem;
+    height: 2px;
+    margin: 3px;
+  }
+  .icon-line-short {
+    width: 0.8rem;
+    height: 2px;
+    margin: 3px;
+  }
+}
+
 </style>
 <script>
 export default {
