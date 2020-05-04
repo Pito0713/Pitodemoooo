@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <div class="burger" @click="toggle">
+    <div
+      class="burger"
+      @click="toggle"
+      :class="{ burgerUp: burgerUp, burgerDown: burgerDown }"
+    >
       <span class="icon-line"></span>
       <span class="icon-line-short"></span>
       <span class="icon-line"></span>
@@ -14,9 +18,27 @@
           <router-link to="/">Home</router-link>
         </li>
         <div v-if="seen" class="list">
-          <div class="nav-lists" :class="{active: active===0}" @click="scrollTo(0)">component</div>
-          <div class="nav-lists" :class="{active: active===1}" @click="scrollTo(1)">Prop In</div>
-          <div class="nav-lists" :class="{active: active===2}" @click="scrollTo(2)">Event Emit</div>
+          <div
+            class="nav-lists"
+            :class="{ active: active === 0 }"
+            @click="scrollTo(0)"
+          >
+            component
+          </div>
+          <div
+            class="nav-lists"
+            :class="{ active: active === 1 }"
+            @click="scrollTo(1)"
+          >
+            Prop In
+          </div>
+          <div
+            class="nav-lists"
+            :class="{ active: active === 2 }"
+            @click="scrollTo(2)"
+          >
+            Event Emit
+          </div>
         </div>
         <li class="nav-items">
           <router-link to="/about">test</router-link>
@@ -32,7 +54,7 @@
 </template>
 
 <style lang="scss">
-//--- goboal ------------------------------------
+//---------- goboal ------------------------------------
 #app {
   font-family: "Fira Sans Extra Condensed", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -54,7 +76,7 @@ a {
 a:visited {
   color: #2c3e50;
 }
-//--- navbar ------------------------------------
+//-------------- navbar ------------------------------------
 .navbar {
   font-family: "Playfair Display SC", serif;
   position: fixed;
@@ -89,15 +111,25 @@ a:visited {
 .active {
   background-color: #aee5a7;
 }
-// -----burger
+// --------burger--------------------
 .burger {
   position: fixed;
-  top: 0;
+  top: -100px;
   left: 0;
-  padding: 1.5rem 1rem;
+  width: 100%;
+  padding: 1rem;
+  background-color: #aee5a7;
   cursor: pointer;
   z-index: 3;
   display: none;
+}
+.burgerUp {
+  transform: translateY(-100px);
+  transition: all 1s ease-out;
+}
+.burgerDown {
+  transform: translateY(100px);
+  transition: all 1s ease-out;
 }
 .icon-line {
   width: 1.5rem;
@@ -113,7 +145,7 @@ a:visited {
   display: block;
   margin: 5px;
 }
-/*------Viewport less than 1024px------*/
+//----------------Viewport ----------------------
 @media only screen and (max-width: 1024px) {
   .navbar {
     width: 30%;
@@ -144,8 +176,8 @@ a:visited {
     font-size: 1.5rem;
   }
   .nav-lists {
-  font-size: 0.9rem;
-}
+    font-size: 0.9rem;
+  }
   .navOps {
     left: 0px !important;
   }
@@ -168,8 +200,8 @@ a:visited {
     font-size: 1rem;
   }
   .nav-lists {
-  font-size: 0.9rem;
-}
+    font-size: 0.9rem;
+  }
   .navOps {
     left: 0px !important;
   }
@@ -202,9 +234,8 @@ a:visited {
     font-size: 1rem;
   }
   .nav-lists {
-  font-size: 0.6rem;
-
-}
+    font-size: 0.6rem;
+  }
   .navOps {
     left: 0px !important;
   }
@@ -225,83 +256,111 @@ a:visited {
     margin: 3px;
   }
 }
-
 </style>
 <script>
 export default {
   data: function() {
     return {
       open: false,
+      burgerUp: true,
+      burgerDown: false,
       seen: false,
       active: 0, // 建立起始
-      screenWidth: document.documentElement.clientWidth
+      screenWidth: document.documentElement.clientWidth,
+      scrollTop: document.documentElement.scrollTop || document.body.scrollTop
     };
   },
   methods: {
+    //navbar
     toggle() {
       this.open = !this.open;
     },
+
+    //用來顯示你看到navlist哪個section
     onScroll() {
       // 取的所有list元素
-      const navContents = document.querySelectorAll(".tip section");
-      // 建立所有list元素的 offsetTop
+      const navList = document.querySelectorAll(".tip section");
+
+      // 建立變數矩陣
+      // 將list.offsetTop的值帶入 矩陣中
       const offsetTopArr = [];
-      //帶入 offsetTop
-      navContents.forEach(item => {
+      navList.forEach(item => {
         offsetTopArr.push(item.offsetTop);
       });
-      //驗證
-      console.log(offsetTopArr)
+      //驗證一下
+      console.log(offsetTopArr);
 
       //取得DOM的 scrollTop
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      // 起始為0 
-      let navIndex = 0;
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      // 建立list的index  起始為0
+      let navListIndex = 0;
       //建立迴圈
       for (let n = 0; n < offsetTopArr.length; n++) {
         // 如果 scrollTop 大於第n元素的 offsetTop
-        // 那前一個元素就看不到了 ,這是輪到下個 n 元素
+        // 那就是前一個元素已經看不到了 ,這是輪到下個 n 元素
         if (scrollTop >= offsetTopArr[n]) {
-          navIndex = n;
-          console.log(n + 'n')
-          console.log(scrollTop)
+          navListIndex = n;
         }
       }
-      // 回傳 data 觸發 active
-      this.active = navIndex;
+      // 回傳n值 觸發 active
+      this.active = navListIndex;
     },
+
+    //用來直接傳到你指定的navlist
     scrollTo(index) {
       // 取得點及目標的 offsetTop
-      // 從1 開始算 因為css起始是 1 
-      // index 起始是 ０
-      let getOffsetTop = document.querySelector(`.tip section:nth-child(${index + 1})`).offsetTop
-      console.log(getOffsetTop + 'get');
+      // 從1 開始算 因為css起始是 1
+      // arr.index 起始是 ０
+      let getOffsetTop = document.querySelector(
+        `.tip section:nth-child(${index + 1})`
+      ).offsetTop;
+
       //帶入目標的 offsetTop  然後移動是目標位置
       document.documentElement.scrollTop = getOffsetTop;
     }
   },
   watch: {
     screenWidth: function() {
-      // 監聽螢幕寬度變化
+      // 當mounted 監聽 screenWidth值 變化
+      // 讓open =false
+      // 大於1024 burger收起來
       if (this.screenWidth < 1024) {
         return (this.open = false);
       }
-      console.log(122);
+    },
+    scrollTop: function() {
+      // 當mounted 監聽 scrollTop值 變化
+      //  讓小於120收起來 大於則放下來
+      if (this.scrollTop > 120) {
+        return (this.burgerUp = false), (this.burgerDown = true);
+      } else {
+        return (this.burgerUp = true), (this.burgerDown = false);
+      }
     }
   },
   mounted() {
     var _this = this; //聲明ㄧ新變量指向Vue父函数的this
+
     window.onresize = function() {
       // 定義視窗大小變更通知事件
       //_this.screenWidth 即時修改父函数的“screenWidth”動態變量
       _this.screenWidth = document.documentElement.clientWidth; // 視窗寬度
     };
 
+    window.onscroll = function() {
+      // 定義視窗大小變更通知事件
+      //_this.screenWidth 即時修改父函数的“screenWidth”動態變量
+      _this.scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+    };
+
+    //新增監聽 scroll 與 onScroll方法的異動
     window.addEventListener("scroll", this.onScroll);
   },
   destroy() {
-    // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
+    // 移除 onScroll監聽，不然前一個子件註銷 但監聽還在會除錯
     window.removeEventListener("scroll", this.onScroll);
   }
-}
+};
 </script>

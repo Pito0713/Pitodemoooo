@@ -16,6 +16,7 @@
       <VuespaceProp></VuespaceProp>
       <VuespaceEvent></VuespaceEvent>
     </div>
+    <!--自動向上-->
     <div class="scrollTop" @click="upTop">＾</div>
   </div>
 </template>
@@ -49,41 +50,53 @@ export default {
   },
   methods: {
     upTop() {
-      //每次上滑移動50px
+      //step每次上滑移動50px
+      // scrollTopStep 取的當前scrollTop
       const step = 50;
-      //取的當前scrollTop 
-      let scrollTop =
+      let scrollTopStep =
         document.documentElement.scrollTop || document.body.scrollTop;
-      //let getFirstOffsetTop = document.querySelector(
-        //`div:nth-child(1)`
-      //).offsetTop;
-      if (scrollTop > 0) {
+      //當scrollTopStep 大於0 就執行
+      if (scrollTopStep > 0) {
         goUP();
       }
+
       function goUP() {
-        if (scrollTop > 0) {
-          if (scrollTop - step > 0) {
-            scrollTop -= step;
-            let _scrollTop = scrollTop;
-            document.body.scrollTop = _scrollTop;
-            document.documentElement.scrollTop = _scrollTop;
+        //scrollTopStep 大於0 就執行
+        //建立迴圈 如果scrollTop - step還大於0就繼續執行
+        //每次都剪掉step的長度 讓畫面慢慢的往上移動
+
+        if (scrollTopStep > 0) {
+          if (scrollTopStep - step > 0) {
+            scrollTopStep -= step;
+            //建立的一個持續變動的變量
+            let _scrollTopStep = scrollTopStep;
+
+            //持續變動的變量 會回傳到scrollTop 使他慢慢的變化移動
+            document.body.scrollTop = _scrollTopStep;
+            document.documentElement.scrollTop = _scrollTopStep;
+
+            //提出動畫需求 當goUP被執行時
+            //持續性的執行 直到goUP 被停下
             requestAnimationFrame(goUP);
           } else {
-            let _scrollTop = 0;
-            document.body.scrollTop = _scrollTop;
-            document.documentElement.scrollTop = _scrollTop;
+            //不是每次都是50整數
+            // scrollTopStep - step < 0
+            // 讓_scrollTopStep 直接 = 0
+            let _scrollTopStep = 0;
+            document.body.scrollTop = _scrollTopStep;
+            document.documentElement.scrollTop = _scrollTopStep;
           }
-          
         }
       }
     }
   },
   mounted() {
-    window.addEventListener("scrollTop", this.upTop);
+    //新增監聽 scrollTopStep 與 upTop方法的異動
+    window.addEventListener("scrollTopStep", this.upTop);
   },
   destroy() {
-    // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
-    window.removeEventListener("scrollTop", this.upTop);
+    // 移除  upTop監聽，不然前一個子件註銷 但監聽還在會除錯
+    window.removeEventListener("scrollTopStep", this.upTop);
   }
 };
 </script>
