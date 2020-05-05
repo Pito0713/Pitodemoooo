@@ -3,7 +3,7 @@
     <div
       class="burger"
       @click="toggle"
-      :class="{ burgerUp: burgerUp, burgerDown: burgerDown }"
+      :class="{ burgerDown: burgerDown }"
     >
       <span class="icon-line"></span>
       <span class="icon-line-short"></span>
@@ -38,6 +38,13 @@
             @click="scrollTo(2)"
           >
             Event Emit
+          </div>
+          <div
+            class="nav-lists"
+            :class="{ active: active === 3 }"
+            @click="scrollTo(3)"
+          >
+            Life Cycle
           </div>
         </div>
         <li class="nav-items">
@@ -114,22 +121,18 @@ a:visited {
 // --------burger--------------------
 .burger {
   position: fixed;
-  top: -100px;
+  top: 0;
   left: 0;
-  width: 100%;
   padding: 1rem;
-  background-color: #aee5a7;
   cursor: pointer;
   z-index: 3;
   display: none;
 }
-.burgerUp {
-  transform: translateY(-100px);
-  transition: all 1s ease-out;
-}
 .burgerDown {
-  transform: translateY(100px);
-  transition: all 1s ease-out;
+  width: 100%;
+  background-color: #aee5a7;
+  transform: translateY(0.5px);
+  transition: all 0.5s ease-out;
 }
 .icon-line {
   width: 1.5rem;
@@ -150,6 +153,7 @@ a:visited {
   .navbar {
     width: 30%;
     left: -30%;
+    opacity: 0.92;
   }
   .nav-logo {
     font-size: 6rem;
@@ -168,6 +172,7 @@ a:visited {
   .navbar {
     width: 40%;
     left: -40%;
+    opacity: 0.92;
   }
   .nav-logo {
     font-size: 4rem;
@@ -192,6 +197,7 @@ a:visited {
   .navbar {
     width: 40%;
     left: -40%;
+    opacity: 0.92;
   }
   .nav-logo {
     font-size: 3rem;
@@ -226,6 +232,7 @@ a:visited {
   .navbar {
     width: 40%;
     left: -40%;
+    opacity: 0.92;
   }
   .nav-logo {
     font-size: 3rem;
@@ -262,7 +269,6 @@ export default {
   data: function() {
     return {
       open: false,
-      burgerUp: true,
       burgerDown: false,
       seen: false,
       active: 0, // 建立起始
@@ -331,11 +337,12 @@ export default {
     },
     scrollTop: function() {
       // 當mounted 監聽 scrollTop值 變化
-      //  讓小於120收起來 大於則放下來
-      if (this.scrollTop > 120) {
-        return (this.burgerUp = false), (this.burgerDown = true);
-      } else {
-        return (this.burgerUp = true), (this.burgerDown = false);
+      //  讓小於1收起來
+      if (this.scrollTop  < 1) {
+        return (this.burgerDown = false);
+      } 
+      else {
+        return (this.burgerDown = true);
       }
     }
   },
@@ -349,8 +356,8 @@ export default {
     };
 
     window.onscroll = function() {
-      // 定義視窗大小變更通知事件
-      //_this.screenWidth 即時修改父函数的“screenWidth”動態變量
+      // 定義scroll大小變更事件
+      //_this.scrollTop 即時修改父函数的“scrollTop”動態變量
       _this.scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
     };

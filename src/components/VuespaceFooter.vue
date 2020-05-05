@@ -24,7 +24,7 @@ export default {};
 .footer {
   position: relative;
   width: 100%;
-  height: 25%;
+  height: 120px;
   background-color: #7daa77;
 }
 .footerContainer {

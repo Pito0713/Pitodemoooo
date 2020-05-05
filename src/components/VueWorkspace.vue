@@ -11,16 +11,7 @@
       </span>
     </div>
     <div class="spaceContainer">
-      <div class="space">
-        <div>
-          <img
-            alt="Vue logo"
-            width="80%"
-            src="../assets/VueWorkspaceEvent.png"
-          />
-        </div>
-      </div>
-      <div class="space">
+      <div class="space"  @click="scrollTo(0)">
         <div>
           <img
             alt="Vue logo"
@@ -29,7 +20,16 @@
           />
         </div>
       </div>
-      <div class="space" style="display: none">
+      <div class="space" @click="scrollTo(1)">
+        <div>
+          <img
+            alt="Vue logo"
+            width="80%"
+            src="../assets/VueWorkspaceEvent.png"
+          />
+        </div>
+      </div>
+      <div class="space" style="display: none" @click="scrollTo(3)">
         <div>
           <img
             alt="Vue logo"
@@ -66,6 +66,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  cursor: pointer;
 }
 /*---dot*/
 .dot {
@@ -180,9 +181,55 @@ export default {
         this.slideIndex = slides.length;
       }
     },
+
     // 當我觸發 點點直接顯示第n的
     clickDot(n) {
       this.slideIndex = n;
+    },
+
+
+    scrollTo(index) {
+      // 取得點及目標的 offsetTop
+      // 從1 開始算 因為css起始是 1
+      // arr.index 起始是 ０
+      let getOffsetTop = document.querySelector(
+        `.tip section:nth-child(${index + 1})`
+      ).offsetTop;
+
+      //帶入目標的 offsetTop  然後移動是目標位置
+      //document.documentElement.scrollTop = getOffsetTop;
+
+      //step每次上滑移動50px
+      // scrollTopStep 取的當前scrollTop
+      const step = 50;
+      let scrollTopStep = 
+        document.documentElement.scrollTop || document.body.scrollTop;
+      //當scrollTopStep 大於0 就執行
+      if (scrollTopStep > 0) {
+        goUP();
+      }
+
+      function goUP() {
+        //scrollTopStep 大於0 就執行
+        //建立迴圈 如果scrollTop - step還大於0就繼續執行
+        //每次都剪掉step的長度 讓畫面慢慢的往上移動
+
+        if (scrollTopStep > 0) {
+          if (scrollTopStep + step < getOffsetTop) {
+            scrollTopStep += step;
+            //建立的一個持續變動的變量
+            let _scrollTopStep = scrollTopStep;
+
+            //持續變動的變量 會回傳到scrollTop 使他慢慢的變化移動
+            document.body.scrollTop = _scrollTopStep;
+            document.documentElement.scrollTop = _scrollTopStep;
+
+            //提出動畫需求 當goUP被執行時
+            //持續性的執行 直到goUP 被停下
+            requestAnimationFrame(goUP);
+          }
+        }
+      }  
     }
   },
   watch: {
@@ -233,6 +280,12 @@ export default {
     window.onresize = function() {
       _this.screenWidth = document.documentElement.clientWidth; // 視窗寬度
     };
+    //新增監聽 scrollTopStep 與 upTop方法的異動
+    window.addEventListener("scrollTopStep", this.upTop);
+  },
+  destroy() {
+    // 移除  upTop監聽，不然前一個子件註銷 但監聽還在會除錯
+    window.removeEventListener("scrollTopStep", this.upTop);
   }
 };
 </script>

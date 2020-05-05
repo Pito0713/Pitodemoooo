@@ -2,22 +2,24 @@
   <div class="myWeb">
     <div class="webTitle">
       <h1>{{ msg }}</h1>
+      <a>Date : {{ value }}</a>
     </div>
     <div class="infoTitle">
       <a>VueWorkSpace</a>
     </div>
     <div class="workspaceInfo">
-      <a>今天是{{ value }}</a>
+      
       <a>分類於</a>
     </div>
     <VueWorkspace></VueWorkspace>
     <div class="tip">
-      <Vuespace></Vuespace>
+      <Vuespacecomponent></Vuespacecomponent>
       <VuespaceProp></VuespaceProp>
       <VuespaceEvent></VuespaceEvent>
+      <VuespaceLifecycle></VuespaceLifecycle>
     </div>
     <!--自動向上-->
-    <div class="scrollTop" @click="upTop">＾</div>
+    <div class="scrollTop" @click="upTop"><i class="fas fa-arrow-up"></i></div>
   </div>
 </template>
 
@@ -25,14 +27,16 @@
 import VuespaceProp from "../components/VuespaceProp.vue";
 import VuespaceEvent from "../components/VuespaceEvent.vue";
 import VueWorkspace from "../components/VueWorkspace.vue";
-import Vuespace from "../components/Vuespace.vue";
+import Vuespacecomponent from "../components/Vuespacecomponent.vue";
+import VuespaceLifecycle from "../components/VuespaceLifecycle.vue";
 export default {
   name: "HelloMyweb",
   components: {
     VueWorkspace,
-    Vuespace,
+    Vuespacecomponent,
     VuespaceProp,
-    VuespaceEvent
+    VuespaceEvent,
+    VuespaceLifecycle
   },
   props: {
     msg: String
@@ -109,6 +113,7 @@ export default {
 .webTitle {
   position: relative;
   display: block;
+  padding-bottom: 2rem;
 }
 .webTitle::before {
   position: absolute;
@@ -125,7 +130,7 @@ export default {
   position: absolute;
   display: block;
   content: " ";
-  top: 75%;
+  top: 70%;
   right: 6%;
   border-bottom: 1px solid #7c8782;
   border-right: 1px solid #7c8782;
@@ -151,18 +156,18 @@ export default {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: #7cbc5c;
+  background-color: #53a52a;
   z-index: 4;
   cursor: pointer;
-  transition: all 3s ease;
+  text-align: center;
 }
 @media only screen and (max-width: 786px) {
   .webTitle::after {
-    top: 30px;
+    top: 80px;
     right: -10px;
   }
   .webTitle::before {
-    top: -10px;
+    top: -15px;
     left: -10px;
   }
 }
