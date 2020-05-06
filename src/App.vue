@@ -5,13 +5,13 @@
       @click="toggle"
       :class="{ burgerDown: burgerDown }"
     >
-      <span class="icon-line"></span>
-      <span class="icon-line-short"></span>
-      <span class="icon-line"></span>
+      <span class="icon-line" :class="{ iconLineOneActive: open }"></span>
+      <span class="icon-line-short" :class="{ iconLinetwoActive: open }"></span>
+      <span class="icon-line" :class="{ iconLineThereActive : open }"></span>
     </div>
     <nav class="navbar" :class="{ navOps: open }">
-      <div class="nav-logo">
-        <router-link to="/">Pito</router-link>
+      <div class="nav-logo" @click="homePage">
+        <router-link to="/" >Pito</router-link>
       </div>
       <ul class="nav-branch">
         <li class="nav-items" @click="seen = !seen">
@@ -63,7 +63,7 @@
 <style lang="scss">
 //---------- goboal ------------------------------------
 #app {
-  font-family: "Fira Sans Extra Condensed", sans-serif;
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -85,7 +85,7 @@ a:visited {
 }
 //-------------- navbar ------------------------------------
 .navbar {
-  font-family: "Playfair Display SC", serif;
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
   position: fixed;
   top: 0;
   left: 0;
@@ -97,8 +97,9 @@ a:visited {
   transition: all 1s ease;
 }
 .nav-logo {
-  font-size: 7rem;
+  font-size: 1rem;
   padding-top: 2rem;
+  cursor: pointer;
 }
 .nav-branch {
   list-style: none;
@@ -131,7 +132,7 @@ a:visited {
 .burgerDown {
   width: 100%;
   background-color: #aee5a7;
-  transform: translateY(0.5px);
+  transform: translateY(0.1px);
   transition: all 0.5s ease-out;
 }
 .icon-line {
@@ -140,6 +141,7 @@ a:visited {
   background-color: #000000;
   display: block;
   margin: 5px;
+  transition: all 0.5s ease;
 }
 .icon-line-short {
   width: 1.2rem;
@@ -147,6 +149,17 @@ a:visited {
   background-color: #000000;
   display: block;
   margin: 5px;
+}
+.iconLineOneActive {
+  transform: rotate(45deg) translate(5px, 7px);
+  width: 2rem;
+}
+.iconLinetwoActive {
+  opacity: 0;
+}
+.iconLineThereActive {
+  transform: rotate(-45deg) translate(5px, -7px);
+  width: 2rem;
 }
 //----------------Viewport ----------------------
 @media only screen and (max-width: 1024px) {
@@ -280,6 +293,10 @@ export default {
     //navbar
     toggle() {
       this.open = !this.open;
+    },
+    homePage() {
+      window.document.body.scrollTop = 0;
+      window.document.documentElement.scrollTop = 0;
     },
 
     //用來顯示你看到navlist哪個section

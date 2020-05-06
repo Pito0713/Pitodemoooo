@@ -114,6 +114,7 @@ export default {
   position: relative;
   display: block;
   padding-bottom: 2rem;
+  font-family: 'Paprika', cursive;
 }
 .webTitle::before {
   position: absolute;
@@ -142,11 +143,12 @@ export default {
   font-size: 0.8rem;
 }
 .infoTitle {
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: 600;
   padding: 1rem 0rem;
   border-top: 1px solid #7c8782;
   color: #7cbc5c;
+  font-family: 'Paprika', cursive;
 }
 .scrollTop {
   position: fixed;
@@ -156,10 +158,14 @@ export default {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: #53a52a;
+  background-color: #4D8E56;
   z-index: 4;
   cursor: pointer;
   text-align: center;
+}
+.scrollTop:hover {
+  background-color: #349B44;
+  box-shadow: #7c8782 1px 1p ;
 }
 @media only screen and (max-width: 786px) {
   .webTitle::after {
