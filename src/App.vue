@@ -97,7 +97,7 @@ a:visited {
   transition: all 1s ease;
 }
 .nav-logo {
-  font-size: 1rem;
+  font-size: 8rem;
   padding-top: 2rem;
   cursor: pointer;
 }

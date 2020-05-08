@@ -17,6 +17,7 @@
       <VuespaceProp></VuespaceProp>
       <VuespaceEvent></VuespaceEvent>
       <VuespaceLifecycle></VuespaceLifecycle>
+      <VueToDoList></VueToDoList>
     </div>
     <!--自動向上-->
     <div class="scrollTop" @click="upTop"><i class="fas fa-arrow-up"></i></div>
@@ -29,6 +30,7 @@ import VuespaceEvent from "../components/VuespaceEvent.vue";
 import VueWorkspace from "../components/VueWorkspace.vue";
 import Vuespacecomponent from "../components/Vuespacecomponent.vue";
 import VuespaceLifecycle from "../components/VuespaceLifecycle.vue";
+import VueToDoList from "../components/VueToDoList.vue";
 export default {
   name: "HelloMyweb",
   components: {
@@ -36,7 +38,8 @@ export default {
     Vuespacecomponent,
     VuespaceProp,
     VuespaceEvent,
-    VuespaceLifecycle
+    VuespaceLifecycle,
+    VueToDoList
   },
   props: {
     msg: String
