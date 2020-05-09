@@ -1,17 +1,13 @@
 <template>
   <div id="app">
-    <div
-      class="burger"
-      @click="toggle"
-      :class="{ burgerDown: burgerDown }"
-    >
+    <div class="burger" @click="toggle" :class="{ burgerDown: burgerDown }">
       <span class="icon-line" :class="{ iconLineOneActive: open }"></span>
       <span class="icon-line-short" :class="{ iconLinetwoActive: open }"></span>
-      <span class="icon-line" :class="{ iconLineThereActive : open }"></span>
+      <span class="icon-line" :class="{ iconLineThereActive: open }"></span>
     </div>
     <nav class="navbar" :class="{ navOps: open }">
       <div class="nav-logo" @click="homePage">
-        <router-link to="/" >Pito</router-link>
+        <router-link to="/">Pito</router-link>
       </div>
       <ul class="nav-branch">
         <li class="nav-items" @click="seen = !seen">
@@ -54,6 +50,7 @@
         <li class="nav-items">About Me</li>
       </ul>
     </nav>
+
     <div>
       <router-view />
     </div>
@@ -63,7 +60,6 @@
 <style lang="scss">
 //---------- goboal ------------------------------------
 #app {
-  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -85,7 +81,7 @@ a:visited {
 }
 //-------------- navbar ------------------------------------
 .navbar {
-  font-family: 'Fira Sans Extra Condensed', sans-serif;
+  font-family: "Fira Sans Extra Condensed", sans-serif;
   position: fixed;
   top: 0;
   left: 0;
@@ -355,10 +351,9 @@ export default {
     scrollTop: function() {
       // 當mounted 監聽 scrollTop值 變化
       //  讓小於1收起來
-      if (this.scrollTop  < 1) {
+      if (this.scrollTop < 1) {
         return (this.burgerDown = false);
-      } 
-      else {
+      } else {
         return (this.burgerDown = true);
       }
     }

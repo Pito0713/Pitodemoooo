@@ -8,7 +8,6 @@
       <a>VueWorkSpace</a>
     </div>
     <div class="workspaceInfo">
-      
       <a>分類於</a>
     </div>
     <VueWorkspace></VueWorkspace>
@@ -17,10 +16,11 @@
       <VuespaceProp></VuespaceProp>
       <VuespaceEvent></VuespaceEvent>
       <VuespaceLifecycle></VuespaceLifecycle>
-      <VueToDoList></VueToDoList>
     </div>
     <!--自動向上-->
-    <div class="scrollTop" @click="upTop"><i class="fas fa-arrow-up"></i></div>
+    <div class="scrollTop" @click="upTop">
+      <i class="fas fa-arrow-up"></i>
+    </div>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ import VuespaceEvent from "../components/VuespaceEvent.vue";
 import VueWorkspace from "../components/VueWorkspace.vue";
 import Vuespacecomponent from "../components/Vuespacecomponent.vue";
 import VuespaceLifecycle from "../components/VuespaceLifecycle.vue";
-import VueToDoList from "../components/VueToDoList.vue";
+
 export default {
   name: "HelloMyweb",
   components: {
@@ -38,8 +38,7 @@ export default {
     Vuespacecomponent,
     VuespaceProp,
     VuespaceEvent,
-    VuespaceLifecycle,
-    VueToDoList
+    VuespaceLifecycle
   },
   props: {
     msg: String
@@ -117,7 +116,7 @@ export default {
   position: relative;
   display: block;
   padding-bottom: 2rem;
-  font-family: 'Paprika', cursive;
+  font-family: "Paprika", cursive;
 }
 .webTitle::before {
   position: absolute;
@@ -151,7 +150,7 @@ export default {
   padding: 1rem 0rem;
   border-top: 1px solid #7c8782;
   color: #7cbc5c;
-  font-family: 'Paprika', cursive;
+  font-family: "Paprika", cursive;
 }
 .scrollTop {
   position: fixed;
@@ -161,14 +160,14 @@ export default {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: #4D8E56;
+  background-color: #4d8e56;
   z-index: 4;
   cursor: pointer;
   text-align: center;
 }
 .scrollTop:hover {
-  background-color: #349B44;
-  box-shadow: #7c8782 1px 1p ;
+  background-color: #349b44;
+  box-shadow: #7c8782 1px 1p;
 }
 @media only screen and (max-width: 786px) {
   .webTitle::after {
