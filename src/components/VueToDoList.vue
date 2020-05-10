@@ -1,41 +1,55 @@
 <template>
-  <div class="toDoOpsition" :class="{ toDoMove: open }" @click="Move">
+  <!-- toDoArrow 被點擊值會帶入class讓整個todo移動-->
+  <div class="toDoOpsition" :class="{ toDoMove: open }">
     <div class="toDo">
-      <div class="toDoArrow">
+      <div class="toDoArrow" @click="Move">
         <i class="fas fa-angle-double-left"></i>
       </div>
       <div class="toDoList">
         <span class="ToDotitle">ToDolist</span>
         <div>
           <div class="toDoTag">
-            <div @click.prevent="visibility = 'all'" @click="choseToDoTag(0)">
+            <!--建立點擊事件
+            filteredTodos中進行 complete是ture(done) / false(doing) / all(全部都要)
+            @click=statue值 再用進行篩選 把要選擇的status帶出
+            choseToDoTag 點擊的標題名稱顏色會因點選而改變
+            -->
+            <div @click.prevent="status = 'all'" @click="choseToDoTag(0)">
               全部
             </div>
-            <div @click.prevent="visibility = 'doing'" @click="choseToDoTag(1)">
-              正在
+            <div @click.prevent="status = 'doing'" @click="choseToDoTag(1)">
+              代辦
             </div>
-            <div @click.prevent="visibility = 'done'" @click="choseToDoTag(2)">
+            <div @click.prevent="status = 'done'" @click="choseToDoTag(2)">
               完成
             </div>
           </div>
           <keep-alive>
             <div class="toDoList-group">
+              <!--filteredTodos 去撈todos的資料
+              起始status 為all 會帶出所有arr中的值
+              v-for會將filteredTodos撈todos的陣列資料一個一個讀取並把值放進item中-->
               <div
                 class="toDoItem"
                 v-for="item in filteredTodos"
                 :key="item.id"
               >
+                <!--checkbox方便勾選this.statue的狀態 
+                用item.id去辨識input label
+                v-model綁定item.completed 當打勾後complete值轉false為true
+                而label 會帶入一個class 加上一條刪除線-->
                 <input type="checkbox" :id="item.id" v-model="item.completed" />
                 <label :for="item.id" :class="{ completed: item.completed }">
                   {{ item.title }}
                 </label>
+
+                <!-- 建立一個刪除鍵-->
                 <button
                   class="toDoItem-button"
                   type="button"
-                  aria-label="Close"
                   @click="removeTodo(item)"
                 >
-                  <span aria-hidden="true">x</span>
+                  <span>x</span>
                 </button>
               </div>
             </div>
@@ -43,6 +57,14 @@
         </div>
 
         <div class="input-group">
+          <!--首先建立資料
+          v雙向綁定this.value 而這個value會成為該資料的title
+          enter後執行addto程式,或是點選下面的bottom也行
+          建立該資料的值 
+          id取當前輸入的時間(因為之後要input label v-for remove要有一個key值可以辨識
+          value -> Title
+          complete -> status(false)
+          -->
           <input
             class="inputPlace"
             type="text"
@@ -53,8 +75,11 @@
           <button class="inputBottom" type="button" @click="addTodo">
             新增
           </button>
+
           <div>
-            <span>還有 {{ uncompletedCount }} 筆任務未完成</span>
+            <!--計算未完成的數量-->
+            <span>還有 {{ doingCount }} 筆任務未完成</span>
+            <!--出除所有的資料-->
             <div @click.prevent="cleanAll">清除所有任務</div>
           </div>
         </div>
@@ -137,6 +162,7 @@
   justify-content: space-between;
   padding-left: 1.7rem;
   word-break: break-all;
+  padding: 0.3rem;
 }
 .toDoItem-button {
   width: 1.5rem;
@@ -148,7 +174,7 @@
 .select {
   background-color: aliceblue !important;
   border-bottom: 0px !important;
-} /*选中的样式*/
+}
 @media only screen and (max-width: 512px) {
   .toDoMove {
     right: 0% !important;
@@ -162,7 +188,7 @@ export default {
       open: false,
       newTodo: "",
       todos: [],
-      visibility: "all",
+      status: "all",
       uncompletedTodos: []
     };
   },
@@ -170,60 +196,85 @@ export default {
     Move: function() {
       this.open = !this.open;
     },
+    //讓選取tag的變景顏色可以變化
+    //找出n 值 然後帶入class 變顏色
     choseToDoTag(n) {
       let i;
-      const a_num = document.querySelectorAll(".toDoTag div");
-      console.log(a_num);
-      for (i = 0; i < a_num.length; i++) {
-        a_num[i].className = i == n ? "select" : "";
+      const tagNum = document.querySelectorAll(".toDoTag div");
+      console.log(tagNum);
+      for (i = 0; i < tagNum.length; i++) {
+        // i == n ? "select" : "" 用三元運算
+        //不是n值 就false
+        tagNum[i].className = i == n ? "select" : "";
       }
     },
+    //
     addTodo: function() {
-      var timestamp = Math.floor(Date.now());
+      //將新增的資料塞進 todos的矩陣之中
+      //建立資料的屬性
+      //id 就取當前時間 做以後v-for的key值
+      //value 為input v-model的值 作為資料的title
+      var timeflag = Math.floor(Date.now());
       var value = this.newTodo;
       this.todos.push({
-        id: timestamp,
+        id: timeflag,
         title: value,
         completed: false
       });
     },
     removeTodo: function(todo) {
-      var deletindex = this.todos.findIndex(function(item) {
+      //從todos中找出要刪除的物件的id
+      //用splice從第(deletItem值) 開始刪除然後只刪除一個
+      var deletItem = this.todos.findIndex(function(item) {
         return todo.id === item.id;
       });
-      this.todos.splice(deletindex, 1);
+      this.todos.splice(deletItem, 1);
     },
+    //清空todos
     cleanAll: function() {
       this.todos = [];
     }
   },
   computed: {
-    uncompletedCount: function() {
-      var uncompletedTodos = this.todos.filter(function(item) {
+    //計算有幾項未完成
+    //從todos中選取出 item.completed 還是false得資料
+    //然後回傳他的數量
+    doingCount: function() {
+      var doingTodos = this.todos.filter(function(item) {
         return item.completed == false;
       });
-      return uncompletedTodos.length;
+      return doingTodos.length;
     },
     filteredTodos: function() {
-      var anotherTodos = [];
-      if (this.visibility == "all") {
+      //這個不能塞在mounted
+      //利用computed 運算即時反映出
+      //用status的狀態進行運算
+      var otherTodos = [];
+
+      if (this.status == "all") {
+        //status起始值all 時帶出所有值
         return this.todos;
-      } else if (this.visibility == "doing") {
+      } else if (this.status == "doing") {
+        //status 值改成doing
+        //則會成false中撈出資料 放進新矩陣
+        //教撈到的資料放進 item 中 再用v-for成線
         this.todos.forEach(function(item) {
           if (item.completed == false) {
-            anotherTodos.push(item);
+            otherTodos.push(item);
           }
         });
-        return anotherTodos;
-      } else if (this.visibility == "done") {
+      } else if (this.status == "done") {
+        //status 值改成done
+        //則會從true中撈出資料 放進新矩陣
+        //將撈到的資料放進 item 中 再用v-for成線
         this.todos.forEach(function(item) {
           if (item.completed == true) {
-            anotherTodos.push(item);
+            otherTodos.push(item);
           }
         });
-        return anotherTodos;
       }
-      return anotherTodos;
+      //最後回傳新矩陣
+      return otherTodos;
     }
   }
 };
