@@ -306,9 +306,6 @@ export default {
       navList.forEach(item => {
         offsetTopArr.push(item.offsetTop);
       });
-      //驗證一下
-      console.log(offsetTopArr);
-
       //取得DOM的 scrollTop
       const scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
@@ -370,8 +367,7 @@ export default {
     window.onscroll = function() {
       // 定義scroll大小變更事件
       //_this.scrollTop 即時修改父函数的“scrollTop”動態變量
-      _this.scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
+      _this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     };
 
     //新增監聽 scroll 與 onScroll方法的異動

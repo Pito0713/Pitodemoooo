@@ -18,8 +18,9 @@
       <VuespaceLifecycle></VuespaceLifecycle>
     </div>
     <!--自動向上-->
-    <div class="scrollTop" @click="upTop">
+    <div class="scrollTop" :class="{ scrollTopHidden: scrollTopShow }" @click="upTop">
       <i class="fas fa-arrow-up"></i>
+      <a>top</a>
     </div>
   </div>
 </template>
@@ -33,6 +34,12 @@ import VuespaceLifecycle from "../components/VuespaceLifecycle.vue";
 
 export default {
   name: "HelloMyweb",
+  data:function(){
+    return{
+      scrollTopShow: true,
+      scrollTop: document.documentElement.scrollTop || document.body.scrollTop
+    }
+  },
   components: {
     VueWorkspace,
     Vuespacecomponent,
@@ -96,7 +103,25 @@ export default {
       }
     }
   },
+  watch:{
+    scrollTop: function() {
+      // 當mounted 監聽 scrollTop值 變化
+      //  讓小於500觸發
+      if (this.scrollTop < 500) {
+        return (this.scrollTopShow = true);
+      } else{
+        return (this.scrollTopShow = false);
+      }
+    }
+  },
   mounted() {
+    var _this = this;
+    window.onscroll = function() {
+      // 定義scroll大小變更事件
+      //_this.scrollTop 即時修改父函数的“scrollTop”動態變量
+      _this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    };
+    
     //新增監聽 scrollTopStep 與 upTop方法的異動
     window.addEventListener("scrollTopStep", this.upTop);
   },
@@ -154,20 +179,26 @@ export default {
 }
 .scrollTop {
   position: fixed;
-  display: block;
+  display: flex;
+  align-items: center;
   bottom: 5%;
   right: 5%;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   background-color: #4d8e56;
   z-index: 4;
   cursor: pointer;
   text-align: center;
+  transition: all 1s ease;
+  opacity: 1;
 }
 .scrollTop:hover {
-  background-color: #349b44;
+  background-color: #4BC65E;
   box-shadow: #7c8782 1px 1p;
+}
+.scrollTopHidden {
+  opacity: 0;
 }
 @media only screen and (max-width: 786px) {
   .webTitle::after {

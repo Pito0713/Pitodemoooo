@@ -3,10 +3,13 @@
   <div class="toDoOpsition" :class="{ toDoMove: open }">
     <div class="toDo">
       <div class="toDoArrow" @click="Move">
-        <i class="fas fa-angle-double-left"></i>
+        <i v-show="!open" class="fas fa-angle-double-left"></i>
+        <i v-show="open" class="fas fa-angle-double-right"></i>
       </div>
       <div class="toDoList">
-        <span class="ToDotitle">ToDolist</span>
+        <span class="ToDotitle">ToDolist </span>
+        <!--計算未完成的數量-->
+        <span> 有 {{ doingCount }} 筆代辦</span>
         <div>
           <div class="toDoTag">
             <!--建立點擊事件
@@ -77,10 +80,10 @@
           </button>
 
           <div>
-            <!--計算未完成的數量-->
-            <span>還有 {{ doingCount }} 筆任務未完成</span>
             <!--出除所有的資料-->
-            <div @click.prevent="cleanAll">清除所有任務</div>
+            <button class="inputBottom" type="button" @click.prevent="cleanAll">
+              <span>清除所有任務</span>
+            </button>
           </div>
         </div>
       </div>
@@ -104,9 +107,9 @@
   display: flex;
 }
 .toDoArrow {
-  width: 2rem;
+  width: 2.5rem;
   height: 4rem;
-  background-color: #e5e5e5;
+  background-color: #dcefdc;
   border-radius: 5px 0px 0px 5px;
 }
 .toDoArrow i {
@@ -115,7 +118,7 @@
 }
 .toDoList {
   width: 100%;
-  background-color: #e5e5e5;
+  background-color: #dcefdc;
   box-shadow: 1px 1px 1px 1px gray;
   padding: 1rem;
 }
@@ -127,7 +130,7 @@
   display: block;
   height: 200px;
   overflow: auto;
-  background-color: aliceblue;
+  background-color: #f4f4f4;
   border-right: 1px solid black;
   border-left: 1px solid black;
   border-bottom: 1px solid black;
@@ -139,7 +142,7 @@
 }
 .toDoTag div {
   width: 33.3333%;
-  background-color: #e5e5e5;
+  background-color: #f4f4f4;
   border-radius: 2px;
   border: 1px solid black;
 }
@@ -172,7 +175,7 @@
   text-decoration: line-through;
 }
 .select {
-  background-color: aliceblue !important;
+  background-color: #f4f4f4 !important;
   border-bottom: 0px !important;
 }
 @media only screen and (max-width: 512px) {
@@ -232,7 +235,10 @@ export default {
     },
     //清空todos
     cleanAll: function() {
-      this.todos = [];
+      var foolProof = confirm(`確定要清除嗎？`);
+      if (foolProof == true) {
+        this.todos = [];
+      }
     }
   },
   computed: {
