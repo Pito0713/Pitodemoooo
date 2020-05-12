@@ -11,7 +11,7 @@
       </span>
     </div>
     <div class="spaceContainer">
-      <div class="space"  @click="scrollTo(0)">
+      <div class="space" @click="scrollTo(0)">
         <div>
           <img
             alt="Vue logo"
@@ -161,7 +161,9 @@ export default {
       slideIndex: 1,
       screenWidth: document.documentElement.clientWidth,
       //抓出點點的數量
-      dots: document.getElementsByClassName("dot")
+      dots: document.getElementsByClassName("dot"),
+      //建立一個虛的位置給計數器放
+      timer: ""
     };
   },
   methods: {
@@ -172,7 +174,7 @@ export default {
     plusSpace(n) {
       this.slideIndex += n;
 
-      var slides = document.getElementsByClassName("space");
+      let slides = document.getElementsByClassName("space");
 
       if (this.slideIndex > slides.length) {
         this.slideIndex = 1;
@@ -186,7 +188,6 @@ export default {
     clickDot(n) {
       this.slideIndex = n;
     },
-
 
     scrollTo(index) {
       // 取得點及目標的 offsetTop
@@ -202,7 +203,7 @@ export default {
       //step每次上滑移動50px
       // scrollTopStep 取的當前scrollTop
       const step = 50;
-      let scrollTopStep = 
+      let scrollTopStep =
         document.documentElement.scrollTop || document.body.scrollTop;
       //當scrollTopStep 大於0 就執行
       if (scrollTopStep > 0) {
@@ -229,7 +230,7 @@ export default {
             requestAnimationFrame(goUP);
           }
         }
-      }  
+      }
     }
   },
   watch: {
@@ -239,8 +240,8 @@ export default {
     //利用 flex order 改變順序 使原本要div順序 可改變顯示
     //利用 class: active 使點點的顏色變化
     slideIndex: function() {
-      var i;
-      var slides = document.getElementsByClassName("space");
+      let i;
+      let slides = document.getElementsByClassName("space");
       for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
       }
@@ -280,8 +281,17 @@ export default {
     window.onresize = function() {
       _this.screenWidth = document.documentElement.clientWidth; // 視窗寬度
     };
+    //自動播放 5秒一次
+    this.timer = setInterval(() => {
+      _this.plusSpace(1);
+    }, 5000);
+
     //新增監聽 scrollTopStep 與 upTop方法的異動
     window.addEventListener("scrollTopStep", this.upTop);
+  },
+  beforeDestroy() {
+    //即時清除防止資料累積太多 beforeDestroy停止setInterval
+    clearInterval(this.timer);
   },
   destroy() {
     // 移除  upTop監聽，不然前一個子件註銷 但監聽還在會除錯
