@@ -44,13 +44,16 @@
           </div>
         </div>
         <li class="nav-items">
-          <router-link to="/about">test</router-link>
+          <router-link to="/about">Demo</router-link>
         </li>
         <li class="nav-items">Note</li>
         <li class="nav-items">About Me</li>
       </ul>
     </nav>
-
+    <!--自動向上-->
+    <div class="scrollTop" @click="upTop" :class="{ scrollTopShowUp : scrollTopShow}">
+      <i class="fas fa-arrow-up"></i>
+    </div>
     <div>
       <router-view />
     </div>
@@ -91,6 +94,7 @@ a:visited {
   padding-top: 2rem;
   background-color: #ccefba;
   transition: all 1s ease;
+  overflow: auto;
 }
 .nav-logo {
   font-size: 8rem;
@@ -102,11 +106,11 @@ a:visited {
   font-size: 2rem;
 }
 .nav-items {
-  padding: 1rem;
+  padding: 1.5rem;
   font-size: 2.5rem;
 }
 .list {
-  padding-bottom: 3rem;
+  padding-bottom: 1.5rem;
 }
 .nav-lists {
   font-size: 1.5rem;
@@ -280,6 +284,36 @@ a:visited {
     margin: 3px;
   }
 }
+.scrollTop {
+  position: fixed;
+  display: block;
+  align-items: center;
+  bottom: 5%;
+  right: 5%;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  z-index: 4;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.5s ease;
+  background-color: #4d8e56;
+  opacity: 0;
+  i{
+    font-size: 1.5rem;
+  }
+}
+.scrollTopShowUp {
+  opacity: 1;
+}
+.scrollTop:hover {
+  background-color: #4bc65e;
+  box-shadow: #7c8782 1px 1p;
+ 
+  i {
+    font-size: 2rem;
+  }
+}
 </style>
 <script>
 export default {
@@ -287,8 +321,10 @@ export default {
     return {
       open: false,
       burgerDown: false,
+      scrollTopShow: false,
       seen: false,
       active: 0, // 建立起始
+      
       screenWidth: document.documentElement.clientWidth,
       scrollTop: document.documentElement.scrollTop || document.body.scrollTop
     };
@@ -342,6 +378,46 @@ export default {
 
       //帶入目標的 offsetTop  然後移動是目標位置
       document.documentElement.scrollTop = getOffsetTop;
+    },
+    upTop() {
+      //step每次上滑移動50px
+      // scrollTopStep 取的當前scrollTop
+      const step = 50;
+      let scrollTopStep =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      //當scrollTopStep 大於0 就執行
+      if (scrollTopStep > 0) {
+        goUP();
+      }
+
+      function goUP() {
+        //scrollTopStep 大於0 就執行
+        //建立迴圈 如果scrollTop - step還大於0就繼續執行
+        //每次都剪掉step的長度 讓畫面慢慢的往上移動
+
+        if (scrollTopStep > 0) {
+          if (scrollTopStep - step > 0) {
+            scrollTopStep -= step;
+            //建立的一個持續變動的變量
+            let _scrollTopStep = scrollTopStep;
+
+            //持續變動的變量 會回傳到scrollTop 使他慢慢的變化移動
+            document.body.scrollTop = _scrollTopStep;
+            document.documentElement.scrollTop = _scrollTopStep;
+
+            //提出動畫需求 當goUP被執行時
+            //持續性的執行 直到goUP 被停下
+            requestAnimationFrame(goUP);
+          } else {
+            //不是每次都是50整數
+            // scrollTopStep - step < 0
+            // 讓_scrollTopStep 直接 = 0
+            let _scrollTopStep = 0;
+            document.body.scrollTop = _scrollTopStep;
+            document.documentElement.scrollTop = _scrollTopStep;
+          }
+        }
+      }
     }
   },
   watch: {
@@ -357,9 +433,15 @@ export default {
       // 當mounted 監聽 scrollTop值 變化
       //  讓小於1收起來
       if (this.scrollTop < 1) {
-        return (this.burgerDown = false);
+        return (
+          this.burgerDown = false,
+          this.scrollTopShow = false
+        );
       } else {
-        return (this.burgerDown = true);
+        return (
+          this.burgerDown = true,
+          this.scrollTopShow = true
+        );
       }
     }
   },
@@ -381,10 +463,14 @@ export default {
 
     //新增監聽 scroll 與 onScroll方法的異動
     window.addEventListener("scroll", this.onScroll);
+    //新增監聽 scrollTopStep 與 upTop方法的異動
+    window.addEventListener("scrollTopStep", this.upTop);
   },
   destroy() {
     // 移除 onScroll監聽，不然前一個子件註銷 但監聽還在會除錯
     window.removeEventListener("scroll", this.onScroll);
+    // 移除  upTop監聽，不然前一個子件註銷 但監聽還在會除錯
+    window.removeEventListener("scrollTopStep", this.upTop);
   }
 };
 </script>

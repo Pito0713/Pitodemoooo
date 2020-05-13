@@ -17,11 +17,6 @@
       <VuespaceEvent></VuespaceEvent>
       <VuespaceLifecycle></VuespaceLifecycle>
     </div>
-    <!--自動向上-->
-    <div class="scrollTop" @click="upTop">
-      <i class="fas fa-arrow-up"></i>
-      <a>top</a>
-    </div>
   </div>
 </template>
 <style scoped lang="scss">
@@ -68,25 +63,6 @@
   color: #7cbc5c;
   font-family: "Paprika", cursive;
 }
-.scrollTop {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  bottom: 5%;
-  right: 5%;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background-color: #4d8e56;
-  z-index: 4;
-  cursor: pointer;
-  text-align: center;
-}
-.scrollTop:hover {
-  background-color: #4bc65e;
-  box-shadow: #7c8782 1px 1p;
-}
-
 @media only screen and (max-width: 786px) {
   .webTitle::after {
     top: 80px;
@@ -113,12 +89,6 @@ import VuespaceLifecycle from "../components/VuespaceLifecycle.vue";
 
 export default {
   name: "HelloMyweb",
-  data: function() {
-    return {
-      scrollTopShow: true,
-      scrollTop: document.documentElement.scrollTop || document.body.scrollTop
-    };
-  },
   components: {
     VueWorkspace,
     Vuespacecomponent,
@@ -139,56 +109,6 @@ export default {
       "-" +
       aData.getDate();
     console.log(this.value);
-  },
-  methods: {
-    upTop() {
-      //step每次上滑移動50px
-      // scrollTopStep 取的當前scrollTop
-      const step = 50;
-      let scrollTopStep =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      //當scrollTopStep 大於0 就執行
-      if (scrollTopStep > 0) {
-        goUP();
-      }
-
-      function goUP() {
-        //scrollTopStep 大於0 就執行
-        //建立迴圈 如果scrollTop - step還大於0就繼續執行
-        //每次都剪掉step的長度 讓畫面慢慢的往上移動
-
-        if (scrollTopStep > 0) {
-          if (scrollTopStep - step > 0) {
-            scrollTopStep -= step;
-            //建立的一個持續變動的變量
-            let _scrollTopStep = scrollTopStep;
-
-            //持續變動的變量 會回傳到scrollTop 使他慢慢的變化移動
-            document.body.scrollTop = _scrollTopStep;
-            document.documentElement.scrollTop = _scrollTopStep;
-
-            //提出動畫需求 當goUP被執行時
-            //持續性的執行 直到goUP 被停下
-            requestAnimationFrame(goUP);
-          } else {
-            //不是每次都是50整數
-            // scrollTopStep - step < 0
-            // 讓_scrollTopStep 直接 = 0
-            let _scrollTopStep = 0;
-            document.body.scrollTop = _scrollTopStep;
-            document.documentElement.scrollTop = _scrollTopStep;
-          }
-        }
-      }
-    }
-  },
-  mounted() {
-    //新增監聽 scrollTopStep 與 upTop方法的異動
-    window.addEventListener("scrollTopStep", this.upTop);
-  },
-  destroy() {
-    // 移除  upTop監聽，不然前一個子件註銷 但監聽還在會除錯
-    window.removeEventListener("scrollTopStep", this.upTop);
   }
 };
 </script>

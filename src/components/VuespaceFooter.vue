@@ -11,8 +11,7 @@
         <a href="https://router.vuejs.org/zh/">Vue Router</a>
       </div>
     </div>
-
-    <div class="foottext">© 2020 04 By AJie</div>
+    <div class="foottext">© 2020.05.14  By Pito</div>
   </div>
 </template>
 
@@ -34,7 +33,7 @@ export default {};
 .footTitle {
   position: relative;
   color: #e5e5e5;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   padding: 1rem 0 1rem 0;
   margin: 0.5rem;
 }
@@ -52,6 +51,10 @@ a:visited {
   color: #e5e5e5;
   position: relative;
   font-size: 1rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 @media only screen and (max-width: 1024px) {

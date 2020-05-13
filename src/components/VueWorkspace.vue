@@ -284,7 +284,7 @@ export default {
     //自動播放 5秒一次
     this.timer = setInterval(() => {
       _this.plusSpace(1);
-    }, 5000);
+    }, 3000);
 
     //新增監聽 scrollTopStep 與 upTop方法的異動
     window.addEventListener("scrollTopStep", this.upTop);
