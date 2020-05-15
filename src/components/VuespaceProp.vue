@@ -1,7 +1,11 @@
 <template>
   <section class="TipSpace">
     <div class="textspace">
-      <h1 class="textTitle">元件傳遞 Props</h1>
+      <div class="textspaceTitle">
+        <div class="titleDot"></div>
+        <div class="title">元件傳遞 Props</div>
+        <div class="titleDot"></div>
+      </div>
       <p>
         <a class="weight">父元件</a> 傳遞資料給
         <a class="weight">子元件</a>
@@ -52,7 +56,7 @@
     </div>
   </section>
 </template>
-<style scoped>
+<style scoped lang="scss">
 .TipSpace {
   display: flex;
   text-align: left;
@@ -66,10 +70,34 @@
   font-size: 0.8rem;
   line-height: 1.5rem;
   padding: 0 1rem 0 0;
-}
-.textspace h1 {
-  text-align: center;
-  padding-bottom: 1rem;
+  .title {
+    position: relative;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+  }
+  .title::before {
+    position: absolute;
+    display: block;
+    content: " ";
+    bottom: 5%;
+    left: -15%;
+    border-bottom: #258433 1px solid;
+    width: 130%;
+    animation: TitleActive 3s alternate infinite;
+  }
+  .textspaceTitle {
+    display: flex;
+    justify-content: center;
+  }
+  .titleDot {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #258433;
+    margin: 1rem 1rem;
+  }
 }
 .codeSpace {
   flex: 2 1 50%;
@@ -82,6 +110,14 @@
 @media only screen and (max-width: 968px) {
   .TipSpace {
     display: block;
+  }
+}
+@keyframes TitleActive {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 130%;
   }
 }
 </style>

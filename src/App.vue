@@ -51,12 +51,14 @@
       </ul>
     </nav>
     <!--自動向上-->
-    <div class="scrollTop" @click="upTop" :class="{ scrollTopShowUp : scrollTopShow}">
+    <div
+      class="scrollTop"
+      @click="upTop"
+      :class="{ scrollTopShowUp: scrollTopShow }"
+    >
       <i class="fas fa-arrow-up"></i>
     </div>
-    <div>
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
@@ -299,7 +301,7 @@ a:visited {
   transition: all 0.5s ease;
   background-color: #4d8e56;
   opacity: 0;
-  i{
+  i {
     font-size: 1.5rem;
   }
 }
@@ -309,7 +311,6 @@ a:visited {
 .scrollTop:hover {
   background-color: #4bc65e;
   box-shadow: #7c8782 1px 1p;
- 
   i {
     font-size: 2rem;
   }
@@ -324,7 +325,6 @@ export default {
       scrollTopShow: false,
       seen: false,
       active: 0, // 建立起始
-      
       screenWidth: document.documentElement.clientWidth,
       scrollTop: document.documentElement.scrollTop || document.body.scrollTop
     };
@@ -433,15 +433,9 @@ export default {
       // 當mounted 監聽 scrollTop值 變化
       //  讓小於1收起來
       if (this.scrollTop < 1) {
-        return (
-          this.burgerDown = false,
-          this.scrollTopShow = false
-        );
+        return (this.burgerDown = false), (this.scrollTopShow = false);
       } else {
-        return (
-          this.burgerDown = true,
-          this.scrollTopShow = true
-        );
+        return (this.burgerDown = true), (this.scrollTopShow = true);
       }
     }
   },

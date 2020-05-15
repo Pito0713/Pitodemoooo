@@ -1,7 +1,11 @@
 <template>
   <section class="TipSpace">
     <div class="textspace">
-      <h1>區域註冊</h1>
+      <div class="textspaceTitle">
+        <div class="titleDot"></div>
+        <div class="title">區域註冊</div>
+        <div class="titleDot"></div>
+      </div>
       <p>
         某些特定元件就會用區域註冊的方式，註冊在需要使用它的元件之中，是一個選項物件，可以由components這個選項物件屬性載入
       </p>
@@ -45,7 +49,7 @@
     </div>
   </section>
 </template>
-<style scoped>
+<style scoped lang="scss">
 .TipSpace {
   display: flex;
   text-align: left;
@@ -59,9 +63,35 @@
   font-size: 0.8rem;
   line-height: 1.5rem;
   padding: 0 1rem 0 0;
-}
-.textspace h1 {
-  text-align: center;
+  .title {
+    position: relative;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+  }
+  .title::before {
+    position: absolute;
+    display: block;
+    content: " ";
+    bottom: 5%;
+    left: -25%;
+    border-bottom: #258433 1px solid;
+    width: 150%;
+    animation: TitleActive 3s alternate infinite;
+    animation-delay: 6s;
+  }
+  .textspaceTitle {
+    display: flex;
+    justify-content: center;
+  }
+  .titleDot {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #258433;
+    margin: 1rem 1rem;
+  }
 }
 .codeSpace {
   flex: 2 1 50%;
@@ -70,6 +100,14 @@
 @media only screen and (max-width: 968px) {
   .TipSpace {
     display: block;
+  }
+}
+@keyframes TitleActive {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 150%;
   }
 }
 </style>

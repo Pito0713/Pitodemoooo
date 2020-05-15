@@ -1,12 +1,17 @@
 <template>
   <section class="TipSpace">
     <div class="textspace">
+      <div class="textspaceTitle">
+        <div class="titleDot"></div>
+        <div class="title">元件傳遞 Emit event</div>
+        <div class="titleDot"></div>
+      </div>
       <h1>元件傳遞 Emit event</h1>
       <a class="weight">子元件</a>傳遞資料給
       <a class="weight">父元件</a>
       <p>
-        emit 函式使用方法是在第一個傳送參數中，填入要觸發方法的名稱：<br />
-        而第二個傳送參數則是傳入想要給予對方什麼樣的內容。
+        emit 函式使用方法是在第一個傳送參數中，填入要觸發方法的名稱：
+        <br />而第二個傳送參數則是傳入想要給予對方什麼樣的內容。
       </p>
     </div>
     <div class="codeSpace">
@@ -71,7 +76,7 @@
     </div>
   </section>
 </template>
-<style scoped>
+<style scoped lang="scss">
 .TipSpace {
   display: block;
   text-align: left;
@@ -81,13 +86,39 @@
   border-bottom: 1px solid #000006;
 }
 .textspace {
+  flex: 1 2 50%;
   font-size: 0.8rem;
   line-height: 1.5rem;
   padding: 0 1rem 0 0;
-}
-.textspace h1 {
-  text-align: center;
-  padding: 1rem;
+  .title {
+    position: relative;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+  }
+  .title::before {
+    position: absolute;
+    display: block;
+    content: " ";
+    bottom: 5%;
+    left: -10%;
+    border-bottom: #258433 1px solid;
+    width: 110%;
+    animation: TitleActive 3s alternate infinite;
+    animation-delay: 6s;
+  }
+  .textspaceTitle {
+    display: flex;
+    justify-content: center;
+  }
+  .titleDot {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #258433;
+    margin: 1rem 1rem;
+  }
 }
 .codeSpace {
   padding: 0 1rem 0 0;
@@ -95,5 +126,13 @@
 .weight {
   font-weight: 800;
   color: #a82b4f;
+}
+@keyframes TitleActive {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 120%;
+  }
 }
 </style>

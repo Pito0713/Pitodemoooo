@@ -8,7 +8,8 @@
       <a>VueWorkSpace</a>
     </div>
     <div class="workspaceInfo">
-      <a>分類於</a>
+      <a>MyTip Category</a>
+      <div class="workspaceInfoActive">Click</div>
     </div>
     <VueWorkspace></VueWorkspace>
     <div class="tip">
@@ -51,14 +52,40 @@
   width: 20px;
   height: 20px;
 }
-.workspaceInfo a {
-  padding: 1rem 2rem;
-  font-size: 0.8rem;
+.workspaceInfo {
+  padding: 0rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: "Fira Sans Extra Condensed", sans-serif;
+  a {
+    font-size: 2.5rem;
+  }
+  .workspaceInfoActive {
+    position: absolute;
+    top: -50%;
+    right: 50%;
+    font-family: "Port Lligat Slab", serif;
+    color: #258433;
+    font-size: 2.2rem;
+    font: 900;
+    transform: translateX(160px) translateY(-5px) rotate(20deg);
+    animation: InfoActive 1s alternate infinite;
+  }
+}
+@keyframes InfoActive {
+  0% {
+    margin-top: 10px;
+  }
+  100% {
+    margin-top: 0px;
+  }
 }
 .infoTitle {
   font-size: 5rem;
   font-weight: 600;
-  padding: 1rem 0rem;
+  padding: 3.5rem 0rem;
   border-top: 1px solid #7c8782;
   color: #7cbc5c;
   font-family: "Paprika", cursive;
@@ -71,6 +98,9 @@
   .webTitle::before {
     top: -15px;
     left: -10px;
+  }
+  .infoTitle {
+    font-size: 4rem;
   }
 }
 @media only screen and (max-width: 512px) {
