@@ -10,8 +10,11 @@
         <router-link to="/">Pito</router-link>
       </div>
       <ul class="nav-branch">
+        <li class="nav-items">
+          <router-link to="/Demo">Demo</router-link>
+        </li>
         <li class="nav-items" @click="seen = !seen">
-          <router-link to="/">Home</router-link>
+          <router-link to="/Note">Note</router-link>
         </li>
         <div v-if="seen" class="list">
           <div
@@ -21,7 +24,7 @@
           >
             component
           </div>
-          <div
+          <!--<div
             class="nav-lists"
             :class="{ active: active === 1 }"
             @click="scrollTo(1)"
@@ -34,20 +37,15 @@
             @click="scrollTo(2)"
           >
             Event Emit
-          </div>
+          </div>-->
           <div
             class="nav-lists"
-            :class="{ active: active === 3 }"
+            :class="{ active: active === 1 }"
             @click="scrollTo(3)"
           >
             Life Cycle
           </div>
         </div>
-        <li class="nav-items">
-          <router-link to="/about">Demo</router-link>
-        </li>
-        <li class="nav-items">Note</li>
-        <li class="nav-items">About Me</li>
       </ul>
     </nav>
     <!--自動向上-->
@@ -82,6 +80,9 @@ a {
   text-decoration: none;
 }
 a:visited {
+  color: #2c3e50;
+}
+a:link {
   color: #2c3e50;
 }
 //-------------- navbar ------------------------------------

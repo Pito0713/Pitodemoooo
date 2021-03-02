@@ -9,13 +9,12 @@
     </div>
     <div class="workspaceInfo">
       <a>MyTip Category</a>
-      <div class="workspaceInfoActive">Click</div>
     </div>
     <VueWorkspace></VueWorkspace>
     <div class="tip">
       <Vuespacecomponent></Vuespacecomponent>
-      <VuespaceProp></VuespaceProp>
-      <VuespaceEvent></VuespaceEvent>
+      <!--<VuespaceProp></VuespaceProp>
+      <VuespaceEvent></VuespaceEvent>-->
       <VuespaceLifecycle></VuespaceLifecycle>
     </div>
   </div>
@@ -111,8 +110,8 @@
 </style>
 
 <script>
-import VuespaceProp from "../components/VuespaceProp.vue";
-import VuespaceEvent from "../components/VuespaceEvent.vue";
+//import VuespaceProp from "../components/VuespaceProp.vue";
+//import VuespaceEvent from "../components/VuespaceEvent.vue";
 import VueWorkspace from "../components/VueWorkspace.vue";
 import Vuespacecomponent from "../components/Vuespacecomponent.vue";
 import VuespaceLifecycle from "../components/VuespaceLifecycle.vue";
@@ -122,8 +121,8 @@ export default {
   components: {
     VueWorkspace,
     Vuespacecomponent,
-    VuespaceProp,
-    VuespaceEvent,
+    //VuespaceProp,
+    //VuespaceEvent,
     VuespaceLifecycle
   },
   props: {

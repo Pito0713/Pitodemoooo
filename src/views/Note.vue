@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="Note">
     <img alt="Vue logo" width="80%" src="../assets/vue-newsletter.png" />
     <HelloMyweb msg="Welcome to My web" />
     <VuespaceFooter></VuespaceFooter>
@@ -8,7 +8,7 @@
 </template>
 
 <style scoped>
-.home {
+.Note {
   padding-top: 3rem;
 }
 </style>
@@ -19,7 +19,7 @@ import VuespaceFooter from "../components/VuespaceFooter.vue";
 import HelloMyweb from "@/components/HelloMyweb.vue";
 import VueToDoList from "../components/VueToDoList.vue";
 export default {
-  name: "Home",
+  name: "Note",
   components: {
     HelloMyweb,
     VuespaceFooter,
