@@ -1,16 +1,8 @@
 <template>
   <div class="Demo">
-    <h1 class="infoTitle ">My Demo</h1>
+    <h1 class="infoTitle">My Demo</h1>
     <div class="DemoContainer">
       <div class="DemoFrame">
-        <iframe
-          src="https://pito0713.github.io/Demo/"
-          frameborder="0"
-          width="100%"
-          height="100%"
-        ></iframe>
-      </div>
-      <div class="DemoIntro">
         <div class="textspace">
           <div class="textspaceTitle">
             <div class="titleDot"></div>
@@ -18,6 +10,22 @@
               <a href="https://pito0713.github.io/Demo/">Vue Dome</a>
             </div>
             <div class="titleDot"></div>
+          </div>
+        </div>
+        <iframe
+          src="https://pito0713.github.io/Demo/"
+          frameborder="0"
+          width="100%"
+          height="100%"
+          href="https://pito0713.github.io/Demo/"
+        ></iframe>
+      </div>
+      <div class="DemoIntro">
+        <div class="textspace">
+          <div class="textspaceTitle">
+            <div class="title">
+              <a>應用</a>
+            </div>
           </div>
           <p>RWD</p>
           <p>css animation</p>
@@ -29,6 +37,17 @@
     </div>
     <div class="DemoContainer">
       <div class="DemoFrame">
+        <div class="textspace">
+          <div class="textspaceTitle">
+            <div class="titleDot"></div>
+            <div class="title">
+              <a href="https://pito0713.github.io/MyWedDemo/"
+                >Javascript Dome</a
+              >
+            </div>
+            <div class="titleDot"></div>
+          </div>
+        </div>
         <iframe
           src="https://pito0713.github.io/MyWedDemo/"
           frameborder="0"
@@ -39,13 +58,9 @@
       <div class="DemoIntro">
         <div class="textspace">
           <div class="textspaceTitle">
-            <div class="titleDot"></div>
             <div class="title">
-              <a href="https://pito0713.github.io/MyWedDemo/"
-                >Javascript Dome</a
-              >
+              <a>應用</a>
             </div>
-            <div class="titleDot"></div>
           </div>
           <p>RWD</p>
           <p>css animation</p>
@@ -81,17 +96,17 @@
   color: #7cbc5c;
   font-family: "Paprika", cursive;
 }
+.title {
+  position: relative;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 0.5rem 0;
+}
 .textspace {
   flex: 1 2 50%;
   font-size: 0.8rem;
   line-height: 1.5rem;
   padding: 0 1rem 0 0;
-  .title {
-    position: relative;
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 0.5rem 0;
-  }
   .title::before {
     position: absolute;
     display: block;
@@ -126,6 +141,11 @@
   }
   100% {
     width: 130%;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .DemoContainer {
+    flex-direction: column;
   }
 }
 </style>
